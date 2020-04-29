@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/surfaceColor"
+    android:keepScreenOn="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+        <TextView
+            android:padding="10dp"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- 4 0 1 -"
+            android:textColor="@color/mediumEmphasis"
+            android:fontFamily="sans-serif-black"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            android:elevation="24dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <Button
+                    android:id="@+id/instruction5"
+                    android:layout_width="58dp"
+                    android:layout_height="17dp"
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:paddingTop="5dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/textGreen"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/instruction6"
+                    android:layout_width="58dp"
+                    android:layout_height="12dp"
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/textRed"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:onClick="extra"
+                    android:id="@+id/extra"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:elevation="12dp"
+                    android:onClick="laptop"
+                    android:id="@+id/laptop"
+                    android:longClickable="true"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@null"/>
+
+                <Button
+                    android:paddingTop="5dp"
+                    android:id="@+id/instruction3"
+                    android:layout_width="58dp"
+                    android:layout_height="17dp"
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/textGreen"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:id="@+id/instruction4"
+                    android:layout_width="58dp"
+                    android:layout_height="12dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/textRed"
+                    android:textAlignment="center"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingLeft="6dp">
+
+                <ImageButton
+                    android:onClick="phone"
+                    android:id="@+id/phone"
+                    android:longClickable="true"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@null"/>
+
+                <Button
+                    android:id="@+id/instruction1"
+                    android:layout_width="58dp"
+                    android:layout_height="17dp"
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:paddingTop="5dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/textGreen"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/instruction2"
+                    android:layout_width="58dp"
+                    android:layout_height="12dp"
+                    android:background="@null"
+                    android:longClickable="true"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/textRed"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="93dp"
+            android:layout_gravity="center"
+            android:background="@null"></WebView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="15dp">
+
+        <EditText
+            android:id="@+id/ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_settings_grey600_36dp"
+            android:drawablePadding="7dp"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp" />
+
+        <EditText
+            android:id="@+id/delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_timer_grey600_36dp"
+            android:drawablePadding="7dp"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="number"
+            android:paddingLeft="7dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp" />
+
+        <EditText
+            android:id="@+id/auto1Begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_power_plug_grey600_36dp"
+            android:drawablePadding="7dp"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="number"
+            android:paddingLeft="7dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp" />
+
+        <EditText
+            android:id="@+id/auto1End"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_power_plug_off_grey600_36dp"
+            android:drawablePadding="7dp"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="number"
+            android:paddingLeft="7dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp" />
+
+        <ImageButton
+            android:paddingLeft="7dp"
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_refresh_grey600_36dp"
+            android:onClick="refresh"/>
+
+    </LinearLayout>
+
+</LinearLayout>
