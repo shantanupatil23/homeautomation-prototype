@@ -3,246 +3,270 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@color/surfaceColor"
-    android:keepScreenOn="true">
+    android:background="@color/colorBackground">
 
 
-    <LinearLayout
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/action_bar"/>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/phone_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cellphone_android_grey600_36dp"/>
+
+        <Button
+            android:id="@+id/phone_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/phone_image"
+            android:background="@null"
+            android:text="Set delay"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:textSize="12.5sp"
+            android:background="@null"
+            android:textColor="@color/colorSecondary"
+            android:layout_centerVertical="true"
+            android:id="@+id/phone_auto_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Config Auto"
+            android:layout_toRightOf="@id/phone_delay"/>
+
+        <RelativeLayout
+            android:paddingHorizontal="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/phone_switch">
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:id="@+id/phone_auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_autorenew_grey600_24dp"/>
+
+            <View
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7dp"
+                android:layout_below="@id/phone_auto"
+                android:layout_width="24dp"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"/>
+
+        </RelativeLayout>
+
+
+        <Switch
+            android:layout_centerVertical="true"
+            android:id="@+id/phone_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/laptop_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_laptop_chromebook_grey600_36dp"/>
+
+        <Button
+            android:id="@+id/laptop_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/laptop_image"
+            android:background="@null"
+            android:paddingHorizontal="10dp"
+            android:text="Set delay"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <Switch
+            android:layout_centerVertical="true"
+            android:id="@+id/laptop_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/extra_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_power_socket_de_grey600_36dp"/>
+
+        <Button
+            android:id="@+id/extra_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/extra_image"
+            android:background="@null"
+            android:paddingHorizontal="10dp"
+            android:text="Set delay"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <Switch
+            android:layout_centerVertical="true"
+            android:id="@+id/extra_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:textColor="@color/colorSecondary"
+        android:fontFamily="serif-monospace"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:text=""
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_marginLeft="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <TextView
-            android:padding="10dp"
-            android:background="@drawable/buttonstyle"
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- 4 0 1 -"
-            android:textColor="@color/mediumEmphasis"
-            android:fontFamily="sans-serif-black"
-            android:textAlignment="center"
-            android:textSize="35sp"
-            android:elevation="24dp"/>
+            android:text="" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/instruction5"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:paddingTop="3dp"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/textGreen"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/instruction6"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/textRed"
-                    android:textSize="12sp" />
-
-                <ImageButton
-                    android:onClick="extra"
-                    android:id="@+id/extra"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:background="@null"/>
-
-            </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal">
+            android:text="" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="right"
-                android:paddingRight="5dp"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:elevation="12dp"
-                    android:onClick="laptop"
-                    android:id="@+id/laptop"
-                    android:longClickable="true"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:background="@null"/>
-
-                <Button
-                    android:paddingTop="3dp"
-                    android:id="@+id/instruction3"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/textGreen"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:id="@+id/instruction4"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/textRed"
-                    android:textAlignment="center"
-                    android:text=""/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:paddingLeft="6dp">
-
-                <ImageButton
-                    android:onClick="phone"
-                    android:id="@+id/phone"
-                    android:longClickable="true"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:background="@null"/>
-
-                <Button
-                    android:id="@+id/instruction1"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:paddingTop="3dp"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/textGreen"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/instruction2"
-                    android:layout_width="75dp"
-                    android:layout_height="17dp"
-                    android:background="@null"
-                    android:longClickable="true"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/textRed"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <WebView
-            android:id="@+id/webview"
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_3"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:background="@null"></WebView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="15dp">
-
-        <EditText
-            android:id="@+id/ip"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_settings_grey600_36dp"
-            android:drawablePadding="7dp"
-            android:fontFamily="sans-serif-medium"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:text="" />
 
-        <EditText
-            android:id="@+id/delay"
-            android:layout_width="wrap_content"
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_timer_grey600_36dp"
-            android:drawablePadding="7dp"
-            android:fontFamily="sans-serif-medium"
-            android:inputType="number"
-            android:paddingLeft="7dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:text="" />
 
-        <EditText
-            android:id="@+id/auto1Begin"
-            android:layout_width="wrap_content"
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_5"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_power_plug_grey600_36dp"
-            android:drawablePadding="7dp"
-            android:fontFamily="sans-serif-medium"
-            android:inputType="number"
-            android:paddingLeft="7dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:text="" />
 
-        <EditText
-            android:id="@+id/auto1End"
-            android:layout_width="wrap_content"
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_6"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_power_plug_off_grey600_36dp"
-            android:drawablePadding="7dp"
-            android:fontFamily="sans-serif-medium"
-            android:inputType="number"
-            android:paddingLeft="7dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:text="" />
 
-        <ImageButton
-            android:paddingLeft="7dp"
-            android:id="@+id/refresh"
-            android:layout_width="wrap_content"
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_7"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ic_refresh_grey600_36dp"
-            android:onClick="refresh"/>
+            android:text="" />
+
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:textColor="@color/colorSecondary"
+            android:fontFamily="serif-monospace"
+            android:layout_margin="1dp"
+            android:textSize="15sp"
+            android:id="@+id/instruction_panel_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
 
     </LinearLayout>
 
