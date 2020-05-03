@@ -16,7 +16,9 @@
         android:layout_weight="1"
         android:paddingTop="15dp"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingRight="15dp"
+        android:orientation="vertical">
+
         <TextView
             android:padding="10dp"
             android:background="@drawable/buttonstyle"
@@ -41,16 +43,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center_horizontal"
-                >
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/instruction5"
-                    android:layout_width="58dp"
+                    android:layout_width="75dp"
                     android:layout_height="17dp"
                     android:background="@null"
                     android:longClickable="true"
-                    android:paddingTop="5dp"
+                    android:paddingTop="3dp"
                     android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/textGreen"
@@ -58,8 +59,8 @@
 
                 <Button
                     android:id="@+id/instruction6"
-                    android:layout_width="58dp"
-                    android:layout_height="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="17dp"
                     android:background="@null"
                     android:longClickable="true"
                     android:text=""
@@ -100,9 +101,9 @@
                     android:background="@null"/>
 
                 <Button
-                    android:paddingTop="5dp"
+                    android:paddingTop="3dp"
                     android:id="@+id/instruction3"
-                    android:layout_width="58dp"
+                    android:layout_width="75dp"
                     android:layout_height="17dp"
                     android:background="@null"
                     android:longClickable="true"
@@ -115,8 +116,8 @@
                     android:background="@null"
                     android:longClickable="true"
                     android:id="@+id/instruction4"
-                    android:layout_width="58dp"
-                    android:layout_height="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="17dp"
                     android:textSize="12sp"
                     android:textColor="@color/textRed"
                     android:textAlignment="center"
@@ -140,11 +141,11 @@
 
                 <Button
                     android:id="@+id/instruction1"
-                    android:layout_width="58dp"
+                    android:layout_width="75dp"
                     android:layout_height="17dp"
                     android:background="@null"
                     android:longClickable="true"
-                    android:paddingTop="5dp"
+                    android:paddingTop="3dp"
                     android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/textGreen"
@@ -152,8 +153,8 @@
 
                 <Button
                     android:id="@+id/instruction2"
-                    android:layout_width="58dp"
-                    android:layout_height="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="17dp"
                     android:background="@null"
                     android:longClickable="true"
                     android:text=""
@@ -167,7 +168,7 @@
         <WebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="93dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:background="@null"></WebView>
 

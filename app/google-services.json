@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "734870582772",
+    "firebase_url": "https://home-automation-401.firebaseio.com",
+    "project_id": "home-automation-401",
+    "storage_bucket": "home-automation-401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734870582772:android:0ddbca5badf73c0fec35a1",
+        "android_client_info": {
+          "package_name": "com.example.homeautomation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734870582772-ni23aqf5um8tsd76cja3spds7uhgtb5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.homeautomation",
+            "certificate_hash": "1e311dfe5cad28268aa4839268adc7beff710e63"
+          }
+        },
+        {
+          "client_id": "734870582772-02nj3luquadvu3vi46bueck0usn1uv6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Ytn0Ywm5r6-U_VAUE8uyMyFW8WRNFUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734870582772-02nj3luquadvu3vi46bueck0usn1uv6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

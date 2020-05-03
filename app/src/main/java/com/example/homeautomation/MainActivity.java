@@ -25,17 +25,24 @@ import java.lang.Math;
 import android.webkit.WebView;
 import android.os.BatteryManager;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.florescu.android.rangeseekbar.RangeSeekBar;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Make changes here
+    private static final String TAG = "MainActivity";
+    // Make changes here
     int url = 101;
     int phone_switch = 3, laptop_switch = 2, extra_switch = 1;
     int auto1Beginning = 95, auto1Ending = 100;
 
-    //Do not change anything here
+    // Do not change anything here
     int start = auto1Beginning, end = auto1Ending;
     boolean statusForAuto1 = false, change1, i1, i2, i3, i4, i5, i6;
     int autoStatus = 2, laptopStatus = 1, phoneStatus = 1, extraStatus = 1, originalTime, bt1, bt2, bt3, bt4, bt5, bt6;
@@ -45,15 +52,41 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        // getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        closeKeyBoard();
+
+        DatabaseReference ip_Reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+        DatabaseReference switch1_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+        DatabaseReference switch2_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+        DatabaseReference switch3_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+
+        //Read from the database
+        ip_Reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getApplicationContext(),"Failed to read value",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         ImageButton buttonpClick = (ImageButton)findViewById(R.id.phone);
         buttonpClick.setBackgroundResource(R.drawable.phone_red);
         ImageButton buttonlClick = (ImageButton)findViewById(R.id.laptop);
         buttonlClick.setBackgroundResource(R.drawable.laptop_red);
         ImageButton buttoneClick = (ImageButton)findViewById(R.id.extra);
         buttoneClick.setBackgroundResource(R.drawable.extra_red);
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadUrl( "http://192.168.0." + url + "/05");
         autoPhone();
         phoneOnCancel();
         phoneOffCancel();
@@ -61,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
         laptopOffCancel();
         extraOnCancel();
         extraOffCancel();
-        WebView myWebView = (WebView) findViewById(R.id.webview);
-        myWebView.loadUrl( "http://192.168.0." + url + "/05");
     }
 
     public void checkIP(){
