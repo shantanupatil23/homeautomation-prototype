@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".timer"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/action_bar"/>
+
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:textAlignment="viewEnd"
+                android:inputType="time"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:id="@+id/hour_edit_text"
+                android:fontFamily="sans-serif"
+                android:textColorHint="@color/textColor"
+                android:textColor="@color/colorAccent"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"/>
+            <TextView
+                android:layout_alignBaseline="@id/hour_edit_text"
+                android:layout_toEndOf="@id/hour_edit_text"
+                android:id="@+id/hour_text"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="h "/>
+            <EditText
+                android:textAlignment="viewEnd"
+                android:inputType="time"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/hour_text"
+                android:id="@+id/minute_edit_text"
+                android:fontFamily="sans-serif"
+                android:textColorHint="@color/textColor"
+                android:textColor="@color/colorAccent"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"/>
+            <TextView
+                android:id="@+id/minute_text"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:layout_alignBaseline="@id/minute_edit_text"
+                android:layout_toEndOf="@id/minute_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m "/>
+            <EditText
+                android:textAlignment="viewEnd"
+                android:inputType="time"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/minute_text"
+                android:id="@+id/second_edit_text"
+                android:fontFamily="sans-serif"
+                android:textColorHint="@color/textColor"
+                android:textColor="@color/colorAccent"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"/>
+            <TextView
+                android:fontFamily="sans-serif"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:layout_alignBaseline="@id/minute_edit_text"
+                android:layout_toEndOf="@id/second_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="s "/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginHorizontal="10dp"
+        android:padding="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/phone_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cellphone_android"/>
+
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
+            android:paddingHorizontal="15dp"
+            android:id="@+id/phone_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/phone_image"
+            android:background="@null"
+            android:text="Phone"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <ImageButton
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:layout_toLeftOf="@id/view_phone_auto_on"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:id="@+id/phone_auto_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_autorenew"/>
+
+        <RelativeLayout
+            android:id="@+id/view_phone_auto_on"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/phone_off"
+            android:layout_marginEnd="5dp">
+
+            <ImageButton
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:id="@+id/phone_auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_autorenew"/>
+
+            <View
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7dp"
+                android:layout_below="@id/phone_auto"
+                android:layout_width="32dp"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toStartOf="@id/phone_on"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/phone_off"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OFF"
+            android:textColor="@color/textColor"
+            android:textSize="13sp"/>
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/phone_on"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ON"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/laptop_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_laptop_chromebook"/>
+
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
+            android:id="@+id/laptop_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/laptop_image"
+            android:background="@null"
+            android:paddingHorizontal="15dp"
+            android:text="Laptop"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toStartOf="@id/laptop_on"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/Laptop_off"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OFF"
+            android:textColor="@color/textColor"
+            android:textSize="13sp"/>
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/laptop_on"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ON"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:background="@drawable/layout_style"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/extra_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_power_socket_de"/>
+
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
+            android:id="@+id/extra_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/extra_image"
+            android:paddingHorizontal="15dp"
+            android:text="Extra socket"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toStartOf="@id/extra_switch_on"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/extra_switch_off"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OFF"
+            android:textColor="@color/textColor"
+            android:textSize="13sp"/>
+
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/extra_switch_on"
+            android:background="@drawable/layout_style"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ON"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

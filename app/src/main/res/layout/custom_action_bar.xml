@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:paddingVertical="5dp">
+    android:paddingVertical="3dp"
+    app:popupTheme="@style/MenuStyle">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_apartment_white_48"/>
+        android:src="@drawable/ic_apartment"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="401"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:paddingLeft="10dp"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-smallcaps"/>

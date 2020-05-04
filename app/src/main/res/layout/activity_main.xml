@@ -7,7 +7,6 @@
     tools:context=".MainActivity"
     android:background="@color/colorBackground">
 
-
     <include
         layout="@layout/custom_action_bar"
         android:id="@+id/action_bar"/>
@@ -15,8 +14,7 @@
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
-        android:paddingVertical="4dp"
-        android:paddingHorizontal="10dp"
+        android:padding="10dp"
         android:background="@drawable/layout_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,52 +24,44 @@
             android:id="@+id/phone_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cellphone_android_grey600_36dp"/>
+            android:src="@drawable/ic_cellphone_android"/>
 
-        <Button
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
+            android:paddingHorizontal="15dp"
             android:id="@+id/phone_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/phone_image"
+            android:layout_toEndOf="@id/phone_image"
             android:background="@null"
-            android:text="Set delay"
+            android:text="Phone"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="12.5sp" />
 
-        <Button
-            android:textAllCaps="false"
-            android:textSize="12.5sp"
-            android:background="@null"
-            android:textColor="@color/colorSecondary"
-            android:layout_centerVertical="true"
-            android:id="@+id/phone_auto_config"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Config Auto"
-            android:layout_toRightOf="@id/phone_delay"/>
-
         <RelativeLayout
-            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/phone_switch">
+            android:layout_toStartOf="@id/phone_switch">
 
             <ImageButton
+                android:padding="5dp"
                 android:layout_centerVertical="true"
                 android:background="@null"
                 android:id="@+id/phone_auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_autorenew_grey600_24dp"/>
+                android:src="@drawable/ic_autorenew"/>
 
             <View
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
                 android:layout_below="@id/phone_auto"
-                android:layout_width="24dp"
+                android:layout_width="32dp"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"/>
 
@@ -88,8 +78,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:paddingVertical="4dp"
-        android:paddingHorizontal="10dp"
+        android:padding="10dp"
         android:background="@drawable/layout_style"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -100,17 +89,19 @@
             android:id="@+id/laptop_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_laptop_chromebook_grey600_36dp"/>
+            android:src="@drawable/ic_laptop_chromebook"/>
 
-        <Button
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
             android:id="@+id/laptop_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/laptop_image"
+            android:layout_toEndOf="@id/laptop_image"
             android:background="@null"
-            android:paddingHorizontal="10dp"
-            android:text="Set delay"
+            android:paddingHorizontal="15dp"
+            android:text="Laptop"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="12.5sp" />
@@ -125,8 +116,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:paddingVertical="4dp"
-        android:paddingHorizontal="10dp"
+        android:padding="10dp"
         android:background="@drawable/layout_style"
         android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
@@ -137,18 +127,18 @@
             android:id="@+id/extra_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_power_socket_de_grey600_36dp"/>
+            android:src="@drawable/ic_power_socket_de"/>
 
-        <Button
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="viewStart"
             android:id="@+id/extra_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/extra_image"
-            android:background="@null"
-            android:paddingHorizontal="10dp"
-            android:text="Set delay"
-            android:textAllCaps="false"
+            android:layout_toEndOf="@id/extra_image"
+            android:paddingHorizontal="15dp"
+            android:text="Extra socket"
             android:textColor="@color/colorSecondary"
             android:textSize="12.5sp" />
 
@@ -161,113 +151,31 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:textColor="@color/colorSecondary"
-        android:fontFamily="serif-monospace"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"/>
-
-    <LinearLayout
-        android:layout_marginLeft="35dp"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:padding="20dp">
 
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_1"
-            android:layout_width="match_parent"
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:padding="15dp"
+            android:drawableStart="@drawable/ic_timer"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/timer_button"
+            android:background="@drawable/layout_style"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="Timer"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"/>
 
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
+    </RelativeLayout>
 
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:textColor="@color/colorSecondary"
-            android:fontFamily="serif-monospace"
-            android:layout_margin="1dp"
-            android:textSize="15sp"
-            android:id="@+id/instruction_panel_9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-    </LinearLayout>
 
 </LinearLayout>

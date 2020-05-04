@@ -10,4 +10,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--  Menu theme  -->
+    <style name="MenuStyle" parent="Theme.AppCompat.Light">
+        <item name="overlapAnchor">false</item>
+        <item name="background">@color/colorBackground</item>
+        <item name="elevation">3dp</item>
+    </style>
+
+    <!--  Popup theme  -->
+    <style name="PopupStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>

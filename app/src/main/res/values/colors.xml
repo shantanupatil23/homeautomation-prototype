@@ -7,4 +7,5 @@
     <color name="colorPrimaryDark">#002984</color>
     <color name="colorSecondary">#777777</color>
     <color name="colorAccent">#3F51B5</color>
+    <color name="textColor">#777777</color>
 </resources>

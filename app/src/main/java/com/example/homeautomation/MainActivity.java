@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,53 +66,61 @@ public class MainActivity extends AppCompatActivity {
         // getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.action_bar);
-        setSupportActionBar(mytoolbar);
+        Toolbar my_toolbar = (Toolbar) findViewById(R.id.action_bar);
+        my_toolbar.setTitle("");
+        my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
+        setSupportActionBar(my_toolbar);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        DatabaseReference ip_Reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
-        DatabaseReference switch1_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
-        DatabaseReference switch2_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
-        DatabaseReference switch3_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
-
-        //Read from the database
-        ip_Reference.addValueEventListener(new ValueEventListener() {
+        Button timer = (Button) findViewById(R.id.timer_button);
+        timer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Toast.makeText(getApplicationContext(),"Failed to read value",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, timer.class));
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        DatabaseReference ip_Reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+//        DatabaseReference switch1_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+//        DatabaseReference switch2_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+//        DatabaseReference switch3_reference = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("ip");
+//
+//        //Read from the database
+//        ip_Reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Toast.makeText(getApplicationContext(),"Failed to read value",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        ImageButton buttonpClick = (ImageButton)findViewById(R.id.phone);
 //        buttonpClick.setBackgroundResource(R.drawable.phone_red);
