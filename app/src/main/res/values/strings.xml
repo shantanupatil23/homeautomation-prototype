@@ -17,4 +17,8 @@
     <string name="tile_phone">Phone</string>
     <string name="tile_laptop">Laptop</string>
     <string name="tile_extra">Extra</string>
+
+    <string name="title_activity_splash_screen">splash_screen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

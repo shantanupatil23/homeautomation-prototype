@@ -97,10 +97,10 @@
 
     <RelativeLayout
         android:layout_marginHorizontal="10dp"
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
         android:background="@drawable/layout_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp">
 
         <ImageView
             android:layout_centerVertical="true"
@@ -125,9 +125,9 @@
             android:textSize="12.5sp" />
 
         <ImageButton
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:padding="5dp"
-            android:layout_toLeftOf="@id/view_phone_auto_on"
+            android:layout_toStartOf="@id/view_phone_auto_on"
             android:layout_centerVertical="true"
             android:background="@null"
             android:id="@+id/phone_auto_off"
@@ -144,7 +144,8 @@
             android:layout_marginEnd="5dp">
 
             <ImageButton
-                android:padding="5dp"
+                android:paddingTop="5dp"
+                android:paddingHorizontal="5dp"
                 android:layout_centerVertical="true"
                 android:background="@null"
                 android:id="@+id/phone_auto"
@@ -156,7 +157,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
                 android:layout_below="@id/phone_auto"
-                android:layout_width="32dp"
+                android:layout_width="26dp"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"/>
 
@@ -169,9 +170,8 @@
             android:layout_toStartOf="@id/phone_on"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/phone_off"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -185,9 +185,8 @@
             android:minWidth="0dp"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/phone_on"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -200,11 +199,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
         android:background="@drawable/layout_style"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp">
 
         <ImageView
             android:layout_centerVertical="true"
@@ -235,9 +234,8 @@
             android:layout_toStartOf="@id/laptop_on"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/Laptop_off"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -251,9 +249,8 @@
             android:minWidth="0dp"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/laptop_on"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -266,12 +263,12 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
         android:background="@drawable/layout_style"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp">
 
         <ImageView
             android:layout_centerVertical="true"
@@ -300,9 +297,8 @@
             android:layout_toStartOf="@id/extra_switch_on"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/extra_switch_off"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -316,9 +312,8 @@
             android:minWidth="0dp"
             style="?android:attr/borderlessButtonStyle"
             android:layout_centerVertical="true"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
             android:id="@+id/extra_switch_on"
-            android:background="@drawable/layout_style"
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:layout_width="wrap_content"
@@ -327,6 +322,32 @@
             android:textColor="@color/colorAccent"
             android:textSize="13sp"
             android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:padding="15dp"
+            android:drawableStart="@drawable/ic_close"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/timer_button"
+            android:background="@drawable/layout_style"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"/>
 
     </RelativeLayout>
 
