@@ -59,12 +59,13 @@
                 android:src="@drawable/ic_autorenew"/>
 
             <View
+                android:id="@+id/auto_bar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
                 android:layout_below="@id/phone_auto"
                 android:layout_width="26dp"
                 android:layout_height="2dp"
-                android:background="@color/colorAccent"/>
+                android:background="#888888"/>
 
         </RelativeLayout>
 
