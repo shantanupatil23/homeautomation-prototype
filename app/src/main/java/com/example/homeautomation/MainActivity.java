@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     Boolean isStartReceived, isEndReceived, isAutoON, isPhoneCharging;
     String switch_phone;
     CountDownTimer phone_auto_timer;
+    public static String CHANNEL_1_ID = "Automatic charging";
+    int phone_auto_notification_id;
 
 //    private static final String TAG = "MainActivity";
 //    // Make changes here
@@ -77,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(MainActivity.this, MyForeGroundService.class);
+        intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+        startService(intent);
+
         Toolbar my_toolbar = findViewById(R.id.action_bar);
         my_toolbar.setTitle("");
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
@@ -186,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     private void phone_auto_2(){
         isStartReceived = false;
         isEndReceived = false;
-        final DatabaseReference start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto_start");
+        final DatabaseReference start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
         start.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -201,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
             }
         });
-        final DatabaseReference end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto_end");
+        final DatabaseReference end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
         end.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -221,7 +233,29 @@ public class MainActivity extends AppCompatActivity {
     private void phone_auto_3() {
         View auto_bar = (View) findViewById(R.id.auto_bar);
         auto_bar.setBackgroundColor(Color.GREEN);
+        final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
         final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch"+switch_phone);
+
+        NotificationChannel automatic_charging = new NotificationChannel(
+                CHANNEL_1_ID,
+                "Automatic charging",
+                NotificationManager.IMPORTANCE_DEFAULT
+        );
+        automatic_charging.setDescription("This notification stays on while automatic charging is enabled");
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        assert manager != null;
+        manager.createNotificationChannel(automatic_charging);
+        NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_flash_auto)
+                .setContentTitle("Automatic charging is Enabled")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setOngoing(true);
+
+        phone_auto_notification_id = (int) System.currentTimeMillis();
+        NotificationManager mnotificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        assert mnotificationmanager != null;
+        mnotificationmanager.notify(phone_auto_notification_id, mbuilder.build());
+
         BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
         assert batterymanager != null;
         final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
@@ -229,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         else phone_switch_firebase.setValue("OFF");
         phone_auto_timer = new CountDownTimer(604800000, 1000) {
             public void onTick(long millisUntilFinished) {
+                test.setValue(String.valueOf(System.currentTimeMillis()));
                 if(isAutoON){
                     BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
                     assert batterymanager != null;
@@ -239,12 +274,18 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     View auto_bar = (View) findViewById(R.id.auto_bar);
                     auto_bar.setBackgroundColor(Color.GRAY);
-                    phone_auto_timer = null;
+                    cancel();
+                    NotificationManager mnotificationmanager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    assert mnotificationmanager != null;
+                    mnotificationmanager.cancel(phone_auto_notification_id);
                 }
             }
             public void onFinish() {
                 View auto_bar = (View) findViewById(R.id.auto_bar);
                 auto_bar.setBackgroundColor(Color.GRAY);
+                NotificationManager mnotificationmanager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                assert mnotificationmanager != null;
+                mnotificationmanager.cancel(phone_auto_notification_id);
             }
         };
         phone_auto_timer.start();
