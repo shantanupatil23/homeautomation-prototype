@@ -16,20 +16,15 @@
         android:usesCleartextTraffic="true">
 
 
-        <!-- Declare foreground service -->
-        <service
-            android:name=".MyForeGroundService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".splash_screen"
             android:theme="@style/Theme.Design.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".timer" />
     </application>
 

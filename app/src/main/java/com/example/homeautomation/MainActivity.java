@@ -20,20 +20,29 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Range;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.ValueCallback;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -58,12 +67,17 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
 
+    int loading=0;
     Long auto_start, auto_end;
     Boolean isStartReceived, isEndReceived, isAutoON, isPhoneCharging;
     String switch_phone;
-    CountDownTimer phone_auto_timer;
     public static String CHANNEL_1_ID = "Automatic charging";
     int phone_auto_notification_id;
+
+
+
+
+
 
 //    private static final String TAG = "MainActivity";
 //    // Make changes here
@@ -85,15 +99,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(MainActivity.this, MyForeGroundService.class);
-        intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
-        startService(intent);
-
         Toolbar my_toolbar = findViewById(R.id.action_bar);
         my_toolbar.setTitle("");
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
+
+
+        CountDownTimer loading_timer = new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+//                TextView texthint = findViewById(R.id.text_internet_hint);
+//                texthint.getLayoutParams().height = T;
+//                texthint.requestLayout();
+                TextView textView = (TextView)findViewById(R.id.text_internet_hint);
+                ViewGroup.LayoutParams params = textView.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                textView.setLayoutParams(params);
+            }
+        };
+        loading_timer.start();
+
+
+
+
+
         final DatabaseReference phone_switch_id_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_id_phone");
         phone_switch_id_firebase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 assert value != null;
                 switch_phone = value;
                 phone_function();
+                loading_func();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -115,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
                 laptop_function(value);
+                loading_func();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -128,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
                 extra_function(value);
+                loading_func();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -148,7 +183,19 @@ public class MainActivity extends AppCompatActivity {
 //        laptopOffCancel();
 //        extraOnCancel();
 //        extraOffCancel();
+//
 
+    }
+
+    private void loading_func(){
+        loading += 25;
+        ProgressBar progressBarLoading = findViewById(R.id.loading_progress_bar);
+        progressBarLoading.setProgress(loading);
+        if (loading==100){
+            RelativeLayout loadinglayout = findViewById(R.id.loading_screen);
+            loadinglayout.getLayoutParams().height = 0;
+            loadinglayout.requestLayout();
+        }
     }
 
     private void phone_auto_1(){
@@ -169,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     auto_bar.setBackgroundColor(Color.GRAY);
                 }
                 phone_auto_button();
+                loading_func();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -261,8 +309,10 @@ public class MainActivity extends AppCompatActivity {
         final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         if(battery_percentage <= auto_end) phone_switch_firebase.setValue("ON");
         else phone_switch_firebase.setValue("OFF");
-        phone_auto_timer = new CountDownTimer(604800000, 1000) {
+        CountDownTimer phone_auto_timer = new CountDownTimer(604800000, 1000) {
             public void onTick(long millisUntilFinished) {
+                final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
+                test.setValue(System.currentTimeMillis());
                 test.setValue(String.valueOf(System.currentTimeMillis()));
                 if(isAutoON){
                     BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
