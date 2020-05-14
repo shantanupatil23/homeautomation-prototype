@@ -8,10 +8,6 @@
     android:background="@color/colorBackground"
     android:id="@+id/activity_home">
 
-    <include
-        layout="@layout/custom_action_bar"
-        android:id="@+id/action_bar"/>
-
     <RelativeLayout
         android:id="@+id/loading_screen"
         android:layout_width="match_parent"
@@ -23,15 +19,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"/>
+
+
             <TextView
+                android:textSize="20sp"
+                android:textColor="@color/textColor"
+                android:fontFamily="sans-serif-medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loading..."
-                android:textSize="25sp"
-                android:textColor="@color/textColor"
-                android:fontFamily="sans-serif-medium"/>
+                android:text="Loading..."/>
 
             <ProgressBar
+                android:layout_marginHorizontal="2dp"
                 android:id="@+id/loading_progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,6 +54,10 @@
             android:fontFamily="sans-serif"/>
 
     </RelativeLayout>
+
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/action_bar"/>
 
     <RelativeLayout
         android:layout_marginTop="20dp"

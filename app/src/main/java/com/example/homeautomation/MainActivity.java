@@ -107,13 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        CountDownTimer loading_timer = new CountDownTimer(4000, 1000) {
+        CountDownTimer loading_timer = new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
-//                TextView texthint = findViewById(R.id.text_internet_hint);
-//                texthint.getLayoutParams().height = T;
-//                texthint.requestLayout();
                 TextView textView = (TextView)findViewById(R.id.text_internet_hint);
                 ViewGroup.LayoutParams params = textView.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
