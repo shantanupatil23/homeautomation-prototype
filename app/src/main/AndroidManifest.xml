@@ -14,12 +14,50 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".MainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
         <activity android:name=".timer" />
+
+        <service
+            android:name=".MyTileService_phone_autocharge"
+            android:icon="@drawable/ic_autorenew_cellphone_android"
+            android:label="@string/tile_phone_autocharge"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyTileService_phone"
+            android:icon="@drawable/ic_cellphone_android"
+            android:label="@string/tile_phone"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyTileService_laptop"
+            android:icon="@drawable/ic_laptop_chromebook"
+            android:label="@string/tile_laptop"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyTileService_extra"
+            android:icon="@drawable/ic_power_socket_de"
+            android:label="@string/tile_extra"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -6,93 +6,41 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Range;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.webkit.ValueCallback;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.CountDownTimer;
-import java.lang.Math;
-import java.util.Objects;
-import java.util.zip.Inflater;
-
-import android.webkit.WebView;
 import android.os.BatteryManager;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.florescu.android.rangeseekbar.RangeSeekBar;
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
-
-    int loading=0;
+    int loading = 0;
     Long auto_start, auto_end;
-    Boolean isStartReceived, isEndReceived, isAutoON, isPhoneCharging;
-    String switch_phone;
+    Boolean isStartReceived = false, isEndReceived = false, isAutoON = false, isPhoneCharging;
     public static String CHANNEL_1_ID = "Automatic charging";
     int phone_auto_notification_id;
-
-
-
-
-
-
-//    private static final String TAG = "MainActivity";
-//    // Make changes here
-//    int url = 101;
-//    int phone_switch = 3, laptop_switch = 2, extra_switch = 1;
-//    int auto1Beginning = 95, auto1Ending = 100;
-//
-//    // Do not change anything here
-//    int start = auto1Beginning, end = auto1Ending;
-//    boolean statusForAuto1 = false, change1, i1, i2, i3, i4, i5, i6;
-//    int autoStatus = 2, laptopStatus = 1, phoneStatus = 1, extraStatus = 1, originalTime, bt1, bt2, bt3, bt4, bt5, bt6;
-//    int i1count = 0, i2count = 0, i3count = 0, i4count = 0, i5count = 0, i6count = 0;
-//    String charValue, b1, b2, b3, b4, b5, b6;
-//    CountDownTimer timer1, timer2, timer3, timer4, timer5, timer6, timer7;
-
+    View auto_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(my_toolbar);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
-
-
-        CountDownTimer loading_timer = new CountDownTimer(5000, 1000) {
+        CountDownTimer loading_timer = new CountDownTimer(7000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
@@ -119,18 +65,26 @@ public class MainActivity extends AppCompatActivity {
         };
         loading_timer.start();
 
+        auto_bar = (View) findViewById(R.id.auto_bar);
 
-
-
-
-        final DatabaseReference phone_switch_id_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_id_phone");
-        phone_switch_id_firebase.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
+        phone_auto_firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                switch_phone = value;
-                phone_function();
+                View auto_bar = (View) findViewById(R.id.auto_bar);
+                if (value.equals("ON")){
+                    isAutoON = true;
+                    if(isStartReceived && isEndReceived){
+                        phone_autocharge();
+                        auto_bar.setBackgroundColor(Color.GREEN);
+                    }
+                }
+                else{
+                    isAutoON = false;
+                    auto_bar.setBackgroundColor(Color.GRAY);
+                }
                 loading_func();
             }
             @Override
@@ -138,31 +92,152 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final DatabaseReference laptop_switch_id_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_id_laptop");
-        laptop_switch_id_firebase.addValueEventListener(new ValueEventListener() {
+        ImageButton auto_image = findViewById(R.id.phone_auto);
+        auto_image.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                laptop_function(value);
-                loading_func();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onClick(View v) {
+                if(isAutoON){
+                    phone_auto_firebase.setValue("OFF");
+                }
+                else{
+                    phone_auto_firebase.setValue("ON");
+                }
             }
         });
 
-        final DatabaseReference extra_switch_id_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_id_extra");
-        extra_switch_id_firebase.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
+        start.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long value = dataSnapshot.getValue(Long.class);
+                assert value != null;
+                auto_start = value;
+                isStartReceived = true;
+                if(isEndReceived && isAutoON){
+                    phone_autocharge();
+                    auto_bar.setBackgroundColor(Color.GREEN);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        final DatabaseReference end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
+        end.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long value = dataSnapshot.getValue(Long.class);
+                assert value != null;
+                auto_end = value;
+                isEndReceived = true;
+                if(isStartReceived && isAutoON){
+                    phone_autocharge();
+                    auto_bar.setBackgroundColor(Color.GREEN);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_phone");
+        final Switch phone_switch_view = findViewById(R.id.phone_switch);
+        phone_switch_firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                extra_function(value);
+                if(value.equals("ON")){
+                    isPhoneCharging = true;
+                    phone_switch_view.setChecked(true);
+                }
+                else if(value.equals("OFF")){
+                    isPhoneCharging = false;
+                    phone_switch_view.setChecked(false);
+                }
                 loading_func();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"Failed to read phone's status",Toast.LENGTH_SHORT).show();
+            }
+        });
+        phone_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    phone_switch_firebase.setValue("ON");
+                }
+                else {
+                    phone_switch_firebase.setValue("OFF");
+                }
+            }
+        });
+
+        final DatabaseReference laptop_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_laptop");
+        final Switch laptop_switch_view = findViewById(R.id.laptop_switch);
+        laptop_switch_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if(value.equals("ON")){
+                    laptop_switch_view.setChecked(true);
+                }
+                else if(value.equals("OFF")){
+                    laptop_switch_view.setChecked(false);
+                }
+                loading_func();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"Failed to read laptop's status",Toast.LENGTH_SHORT).show();
+            }
+        });
+        laptop_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    laptop_switch_firebase.setValue("ON");
+                }
+                else {
+                    laptop_switch_firebase.setValue("OFF");
+                }
+            }
+        });
+
+        final DatabaseReference extra_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_extra");
+        final Switch extra_switch_view = findViewById(R.id.extra_switch);
+        extra_switch_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if(value.equals("ON")){
+                    extra_switch_view.setChecked(true);
+                }
+                else if(value.equals("OFF")){
+                    extra_switch_view.setChecked(false);
+                }
+                loading_func();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"Failed to read extra's status",Toast.LENGTH_SHORT).show();
+            }
+        });
+        extra_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    extra_switch_firebase.setValue("ON");
+                }
+                else {
+                    extra_switch_firebase.setValue("OFF");
+                }
             }
         });
 
@@ -173,15 +248,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, timer.class));
             }
         });
-//        autoPhone();
-//        phoneOnCancel();
-//        phoneOffCancel();
-//        laptopOnCancel();
-//        laptopOffCancel();
-//        extraOnCancel();
-//        extraOffCancel();
-//
-
     }
 
     private void loading_func(){
@@ -189,97 +255,16 @@ public class MainActivity extends AppCompatActivity {
         ProgressBar progressBarLoading = findViewById(R.id.loading_progress_bar);
         progressBarLoading.setProgress(loading);
         if (loading==100){
-            RelativeLayout loadinglayout = findViewById(R.id.loading_screen);
-            loadinglayout.getLayoutParams().height = 0;
-            loadinglayout.requestLayout();
+            RelativeLayout loading_layout = findViewById(R.id.loading_screen);
+            loading_layout.getLayoutParams().height = 0;
+            loading_layout.requestLayout();
         }
     }
 
-    private void phone_auto_1(){
-        final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
-        phone_auto_firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                View auto_bar = (View) findViewById(R.id.auto_bar);
-                if (value.equals("ON")){
-                    isAutoON = true;
-                    phone_auto_2();
-                    auto_bar.setBackgroundColor(Color.GREEN);
-                }
-                else{
-                    isAutoON = false;
-                    auto_bar.setBackgroundColor(Color.GRAY);
-                }
-                phone_auto_button();
-                loading_func();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-    private void phone_auto_button(){
-        final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
-        ImageButton auto_image = (ImageButton) findViewById(R.id.phone_auto);
-        auto_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View auto_bar = (View) findViewById(R.id.auto_bar);
-                if(isAutoON){
-                    phone_auto_firebase.setValue("OFF");
-                    auto_bar.setBackgroundColor(Color.GRAY);
-                }
-                else{
-                    phone_auto_firebase.setValue("ON");
-                    auto_bar.setBackgroundColor(Color.GREEN);
-                }
-            }
-        });
-    }
-
-    private void phone_auto_2(){
-        isStartReceived = false;
-        isEndReceived = false;
-        final DatabaseReference start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
-        start.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long value = dataSnapshot.getValue(Long.class);
-                assert value != null;
-                auto_start = value;
-                isStartReceived = true;
-                if(isEndReceived) phone_auto_3();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
-            }
-        });
-        final DatabaseReference end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
-        end.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long value = dataSnapshot.getValue(Long.class);
-                assert value != null;
-                auto_end = value;
-                isEndReceived = true;
-                if(isStartReceived) phone_auto_3();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void phone_auto_3() {
-        View auto_bar = (View) findViewById(R.id.auto_bar);
+    private void phone_autocharge() {
         auto_bar.setBackgroundColor(Color.GREEN);
         final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
-        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch"+switch_phone);
+        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_phone");
 
         NotificationChannel automatic_charging = new NotificationChannel(
                 CHANNEL_1_ID,
@@ -308,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
         else phone_switch_firebase.setValue("OFF");
         CountDownTimer phone_auto_timer = new CountDownTimer(604800000, 1000) {
             public void onTick(long millisUntilFinished) {
+                test.setValue(System.currentTimeMillis());
                 final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
                 test.setValue(System.currentTimeMillis());
                 test.setValue(String.valueOf(System.currentTimeMillis()));
@@ -336,110 +322,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         phone_auto_timer.start();
-    }
-
-    private void phone_function() {
-        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch"+switch_phone);
-        final Switch phone_switch_view = findViewById(R.id.phone_switch);
-        phone_switch_firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                if(value.equals("ON")){
-                    isPhoneCharging = true;
-                    phone_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
-                    isPhoneCharging = true;
-                    phone_switch_view.setChecked(false);
-                }
-                phone_auto_1();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read phone's status",Toast.LENGTH_SHORT).show();
-            }
-        });
-        phone_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    phone_switch_firebase.setValue("ON");
-                }
-                else {
-                    phone_switch_firebase.setValue("OFF");
-                }
-            }
-        });
-    }
-
-    private void laptop_function(String switch_laptop){
-        final DatabaseReference laptop_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch"+switch_laptop);
-        final Switch laptop_switch_view = findViewById(R.id.laptop_switch);
-        laptop_switch_firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                if(value.equals("ON")){
-                    laptop_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
-                    laptop_switch_view.setChecked(false);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read laptop's status",Toast.LENGTH_SHORT).show();
-            }
-        });
-        laptop_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    laptop_switch_firebase.setValue("ON");
-                }
-                else {
-                    laptop_switch_firebase.setValue("OFF");
-                }
-            }
-        });
-    }
-
-    private void extra_function(String switch_extra){
-
-
-        final DatabaseReference extra_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch"+switch_extra);
-        final Switch extra_switch_view = findViewById(R.id.extra_switch);
-        extra_switch_firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                if(value.equals("ON")){
-                    extra_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
-                    extra_switch_view.setChecked(false);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's status",Toast.LENGTH_SHORT).show();
-            }
-        });
-        extra_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    extra_switch_firebase.setValue("ON");
-                }
-                else {
-                    extra_switch_firebase.setValue("OFF");
-                }
-            }
-        });
     }
 
     @Override

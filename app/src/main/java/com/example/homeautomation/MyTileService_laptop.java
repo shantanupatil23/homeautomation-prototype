@@ -1,35 +1,89 @@
-//package com.example.homeautomation;
-//
-//import android.graphics.drawable.Icon;
-//import android.service.quicksettings.TileService;
-//import android.webkit.WebView;
-//
-//public class MyTileService_laptop extends TileService {
-//
-//    private final int STATE_ON = 1;
-//    private final int STATE_OFF = 0;
-//    private int toggleState = STATE_ON;
-//
-//    int url = 100;
-//
-//    @Override
-//    public void onClick() {
-//        Icon icon;
-//        if(toggleState == STATE_ON){
-//            toggleState = STATE_OFF;
-//            icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_laptop_chromebook_white_36dp);
-//            goto_url(1);
-//        } else {
-//            toggleState = STATE_ON;
-//            icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_laptop_chromebook_white_36dp);
-//            goto_url(0);
-//        }
-//        getQsTile().setIcon(icon);
-//        getQsTile().updateTile();
-//    }
-//
-//    public void goto_url(int status){
-//        //WebView myWebView = (WebView) findViewById(R.id.webview);
-//        //myWebView.loadUrl( "http://192.168.0." + url + "/" + status + "2");
-//    }
-//}
+package com.example.homeautomation;
+
+
+import android.service.quicksettings.Tile;
+import android.service.quicksettings.TileService;
+import androidx.annotation.NonNull;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class MyTileService_laptop extends TileService {
+
+    boolean isEnabled = false;
+    Tile tile;
+
+    @Override
+    public void onTileAdded() {
+        super.onTileAdded();
+        tile = getQsTile();
+        final DatabaseReference switch_status_laptop_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_laptop");
+        switch_status_laptop_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if (value.equals("ON")){
+                    isEnabled = true;
+                    tile.setState(Tile.STATE_ACTIVE);
+                    tile.updateTile();
+                }
+                else{
+                    isEnabled = false;
+                    tile.setState(Tile.STATE_INACTIVE);
+                    tile.updateTile();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    @Override
+    public void onStartListening() {
+        super.onStartListening();
+        tile = getQsTile();
+        final DatabaseReference switch_status_laptop_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_laptop");
+        switch_status_laptop_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if (value.equals("ON")){
+                    isEnabled = true;
+                    tile.setState(Tile.STATE_ACTIVE);
+                    tile.updateTile();
+                }
+                else{
+                    isEnabled = false;
+                    tile.setState(Tile.STATE_INACTIVE);
+                    tile.updateTile();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    @Override
+    public void onClick() {
+        tile = getQsTile();
+        final DatabaseReference switch_status_laptop_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_laptop");
+        if (isEnabled){
+            tile.setState(Tile.STATE_INACTIVE);
+            tile.updateTile();
+            switch_status_laptop_firebase.setValue("OFF");
+            isEnabled = false;
+        }
+        else{
+            tile.setState(Tile.STATE_ACTIVE);
+            tile.updateTile();
+            switch_status_laptop_firebase.setValue("ON");
+            isEnabled = true;
+        }
+    }
+}

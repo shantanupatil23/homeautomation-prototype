@@ -14,9 +14,10 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="tile_phone">Phone</string>
-    <string name="tile_laptop">Laptop</string>
-    <string name="tile_extra">Extra</string>
+    <string name="tile_phone_autocharge">Auto Charge</string>
+    <string name="tile_phone">Phone Charging</string>
+    <string name="tile_laptop">Laptop Charging</string>
+    <string name="tile_extra">Extra Socket</string>
 
     <string name="title_activity_splash_screen">splash_screen</string>
     <string name="dummy_button">Dummy Button</string>
