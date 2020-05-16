@@ -1,6 +1,5 @@
 package com.example.homeautomation;
 
-
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import androidx.annotation.NonNull;
@@ -74,16 +73,10 @@ public class MyTileService_extra extends TileService {
         tile = getQsTile();
         final DatabaseReference switch_status_extra_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_extra");
         if (isEnabled){
-            tile.setState(Tile.STATE_INACTIVE);
-            tile.updateTile();
             switch_status_extra_firebase.setValue("OFF");
-            isEnabled = false;
         }
         else{
-            tile.setState(Tile.STATE_ACTIVE);
-            tile.updateTile();
             switch_status_extra_firebase.setValue("ON");
-            isEnabled = true;
         }
     }
 }

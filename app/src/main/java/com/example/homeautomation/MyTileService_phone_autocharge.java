@@ -73,16 +73,11 @@ public class MyTileService_phone_autocharge extends TileService {
         tile = getQsTile();
         final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
         if (isEnabled){
-            tile.setState(Tile.STATE_INACTIVE);
-            tile.updateTile();
             phone_auto_firebase.setValue("OFF");
             isEnabled = false;
         }
         else{
-            tile.setState(Tile.STATE_ACTIVE);
-            tile.updateTile();
             phone_auto_firebase.setValue("ON");
-            isEnabled = true;
         }
     }
 }

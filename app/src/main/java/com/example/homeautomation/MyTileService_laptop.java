@@ -74,16 +74,10 @@ public class MyTileService_laptop extends TileService {
         tile = getQsTile();
         final DatabaseReference switch_status_laptop_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_laptop");
         if (isEnabled){
-            tile.setState(Tile.STATE_INACTIVE);
-            tile.updateTile();
             switch_status_laptop_firebase.setValue("OFF");
-            isEnabled = false;
         }
         else{
-            tile.setState(Tile.STATE_ACTIVE);
-            tile.updateTile();
             switch_status_laptop_firebase.setValue("ON");
-            isEnabled = true;
         }
     }
 }
