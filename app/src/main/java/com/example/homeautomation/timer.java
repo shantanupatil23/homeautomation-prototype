@@ -34,6 +34,9 @@ public class timer extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(timer.this, MyForeGroundService.class);
+                intent.setAction(MyForeGroundService.ACTION_STOP_FOREGROUND_SERVICE);
+                startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
             }
         });

@@ -14,6 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <!--    ForeGround Services    -->
+        <service
+            android:name=".MyForeGroundService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!--    Activities    -->
         <activity android:name=".MainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -21,13 +28,14 @@
         </intent-filter></activity>
         <activity android:name=".timer" />
 
+        <!--    QS Tile Services    -->
         <service
             android:name=".MyTileService_phone_autocharge"
             android:icon="@drawable/ic_autorenew_cellphone_android"
             android:label="@string/tile_phone_autocharge"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
         <service
@@ -36,7 +44,7 @@
             android:label="@string/tile_phone"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
         <service
@@ -45,7 +53,7 @@
             android:label="@string/tile_laptop"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
         <service
@@ -54,7 +62,7 @@
             android:label="@string/tile_extra"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
     </application>
