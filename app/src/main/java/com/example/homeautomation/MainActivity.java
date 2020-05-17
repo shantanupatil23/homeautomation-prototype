@@ -33,13 +33,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     int loading = 0;
-    Long auto_start, auto_end;
-    Boolean isStartReceived = false, isEndReceived = false, isAutoON = false, isPhoneCharging;
-    public static String CHANNEL_1_ID = "Automatic charging";
-    int phone_auto_notification_id;
+    Boolean isAutoON = false;
     View auto_bar;
 
     @Override
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
-                TextView textView = (TextView)findViewById(R.id.text_internet_hint);
+                TextView textView = findViewById(R.id.text_internet_hint);
                 ViewGroup.LayoutParams params = textView.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 textView.setLayoutParams(params);
@@ -65,21 +66,21 @@ public class MainActivity extends AppCompatActivity {
         };
         loading_timer.start();
 
-        auto_bar = (View) findViewById(R.id.auto_bar);
+
 
         final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
+        auto_bar = findViewById(R.id.auto_bar);
         phone_auto_firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                View auto_bar = (View) findViewById(R.id.auto_bar);
                 if (value.equals("ON")){
+                    Intent intent = new Intent(MainActivity.this, MyForeGroundServicePhoneAuto.class);
+                    intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                    startService(intent);
                     isAutoON = true;
-                    if(isStartReceived && isEndReceived){
-                        phone_autocharge();
-                        auto_bar.setBackgroundColor(Color.GREEN);
-                    }
+                    auto_bar.setBackgroundColor(Color.GREEN);
                 }
                 else{
                     isAutoON = false;
@@ -105,44 +106,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final DatabaseReference start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
-        start.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long value = dataSnapshot.getValue(Long.class);
-                assert value != null;
-                auto_start = value;
-                isStartReceived = true;
-                if(isEndReceived && isAutoON){
-                    phone_autocharge();
-                    auto_bar.setBackgroundColor(Color.GREEN);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        final DatabaseReference end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
-        end.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long value = dataSnapshot.getValue(Long.class);
-                assert value != null;
-                auto_end = value;
-                isEndReceived = true;
-                if(isStartReceived && isAutoON){
-                    phone_autocharge();
-                    auto_bar.setBackgroundColor(Color.GREEN);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
-            }
-        });
-
         final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_phone");
         final Switch phone_switch_view = findViewById(R.id.phone_switch);
         phone_switch_firebase.addValueEventListener(new ValueEventListener() {
@@ -151,11 +114,9 @@ public class MainActivity extends AppCompatActivity {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
                 if(value.equals("ON")){
-                    isPhoneCharging = true;
                     phone_switch_view.setChecked(true);
                 }
                 else if(value.equals("OFF")){
-                    isPhoneCharging = false;
                     phone_switch_view.setChecked(false);
                 }
                 loading_func();
@@ -165,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Failed to read phone's status",Toast.LENGTH_SHORT).show();
             }
         });
+
         phone_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -197,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Failed to read laptop's status",Toast.LENGTH_SHORT).show();
             }
         });
+
         laptop_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -229,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Failed to read extra's status",Toast.LENGTH_SHORT).show();
             }
         });
+
         extra_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -259,69 +223,6 @@ public class MainActivity extends AppCompatActivity {
             loading_layout.getLayoutParams().height = 0;
             loading_layout.requestLayout();
         }
-    }
-
-    private void phone_autocharge() {
-        auto_bar.setBackgroundColor(Color.GREEN);
-        final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
-        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_phone");
-
-        NotificationChannel automatic_charging = new NotificationChannel(
-                CHANNEL_1_ID,
-                "Automatic charging",
-                NotificationManager.IMPORTANCE_DEFAULT
-        );
-        automatic_charging.setDescription("This notification stays on while automatic charging is enabled");
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        assert manager != null;
-        manager.createNotificationChannel(automatic_charging);
-        NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_flash_auto)
-                .setContentTitle("Automatic charging is Enabled")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setOngoing(true);
-
-        phone_auto_notification_id = (int) System.currentTimeMillis();
-        NotificationManager mnotificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        assert mnotificationmanager != null;
-        mnotificationmanager.notify(phone_auto_notification_id, mbuilder.build());
-
-        BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
-        assert batterymanager != null;
-        final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        if(battery_percentage <= auto_end) phone_switch_firebase.setValue("ON");
-        else phone_switch_firebase.setValue("OFF");
-        CountDownTimer phone_auto_timer = new CountDownTimer(604800000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                test.setValue(System.currentTimeMillis());
-                final DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("test");
-                test.setValue(System.currentTimeMillis());
-                test.setValue(String.valueOf(System.currentTimeMillis()));
-                if(isAutoON){
-                    BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
-                    assert batterymanager != null;
-                    final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-                    if(battery_percentage <= auto_start) if(!isPhoneCharging) phone_switch_firebase.setValue("ON");
-                    else if(battery_percentage >= auto_end) if(isPhoneCharging) phone_switch_firebase.setValue("OFF");
-                }
-                else{
-                    View auto_bar = (View) findViewById(R.id.auto_bar);
-                    auto_bar.setBackgroundColor(Color.GRAY);
-                    cancel();
-                    NotificationManager mnotificationmanager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    assert mnotificationmanager != null;
-                    mnotificationmanager.cancel(phone_auto_notification_id);
-                }
-            }
-            public void onFinish() {
-                View auto_bar = (View) findViewById(R.id.auto_bar);
-                auto_bar.setBackgroundColor(Color.GRAY);
-                NotificationManager mnotificationmanager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                assert mnotificationmanager != null;
-                mnotificationmanager.cancel(phone_auto_notification_id);
-            }
-        };
-        phone_auto_timer.start();
     }
 
     @Override

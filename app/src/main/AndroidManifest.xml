@@ -16,7 +16,39 @@
 
         <!--    ForeGround Services    -->
         <service
-            android:name=".MyForeGroundService"
+            android:name=".MyForeGroundServicePhoneAuto"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServicePhoneAutoON"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServicePhoneAutoOFF"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServicePhoneON"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServicePhoneOFF"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServiceLaptopON"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServiceLaptopOFF"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServiceExtraON"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyForeGroundServiceExtraOFF"
             android:enabled="true"
             android:exported="true" />
 
