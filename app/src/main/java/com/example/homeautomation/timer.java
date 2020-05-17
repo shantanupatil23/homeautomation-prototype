@@ -41,7 +41,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServicePhoneAutoON.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServicePhoneAutoON.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -53,7 +53,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServicePhoneAutoOFF.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServicePhoneAutoOFF.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -65,7 +65,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServicePhoneON.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServicePhoneON.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -77,7 +77,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServicePhoneOFF.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServicePhoneOFF.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -89,7 +89,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServiceLaptopON.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServiceLaptopON.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -101,7 +101,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServiceLaptopOFF.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServiceLaptopOFF.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -113,7 +113,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServiceExtraON.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServiceExtraON.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));
@@ -125,7 +125,7 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(timer.this, MyForeGroundServiceExtraOFF.class);
-                intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                intent.setAction(MyForeGroundServiceExtraOFF.ACTION_START_FOREGROUND_SERVICE);
                 intent.putExtra("time_delay", find_delay());
                 startService(intent);
                 startActivity(new Intent(timer.this, MainActivity.class));

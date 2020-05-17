@@ -127,7 +127,7 @@ public class MyForeGroundServiceLaptopON extends Service {
         // Create notification builder.
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setContentTitle("Laptop's charging will turn ON at " + output_time_of_execution_hour + ":" + output_time_of_execution_min)
-                .setSmallIcon(R.drawable.ic_apartment)
+                .setSmallIcon(R.drawable.ic_launcher_grayscale)
                 .setPriority(0);
 
         // Add Close button intent in notification.

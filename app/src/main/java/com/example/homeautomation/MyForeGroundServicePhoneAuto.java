@@ -184,7 +184,7 @@ public class MyForeGroundServicePhoneAuto extends Service {
         // Create notification builder.
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setContentTitle("Automatic charging enabled")
-                .setSmallIcon(R.drawable.ic_apartment)
+                .setSmallIcon(R.drawable.ic_launcher_grayscale)
                 .setPriority(0);
 
         // Add Close button intent in notification.

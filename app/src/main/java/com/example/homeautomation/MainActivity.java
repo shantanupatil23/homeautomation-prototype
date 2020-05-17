@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 assert value != null;
                 if (value.equals("ON")){
                     Intent intent = new Intent(MainActivity.this, MyForeGroundServicePhoneAuto.class);
-                    intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
+                    intent.setAction(MyForeGroundServicePhoneAuto.ACTION_START_FOREGROUND_SERVICE);
                     startService(intent);
                     isAutoON = true;
                     auto_bar.setBackgroundColor(Color.GREEN);
