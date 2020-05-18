@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <!--    ForeGround Services    -->
+        <activity android:name=".PopUpAutochargeConfig"></activity>
+        <!-- ForeGround Services -->
         <service
             android:name=".MyForeGroundServicePhoneAuto"
             android:enabled="true"
@@ -50,17 +50,15 @@
         <service
             android:name=".MyForeGroundServiceExtraOFF"
             android:enabled="true"
-            android:exported="true" />
-
-        <!--    Activities    -->
+            android:exported="true" /> <!-- Activities -->
         <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".timer" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!--    QS Tile Services    -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".timer" /> <!-- QS Tile Services -->
         <service
             android:name=".MyTileService_phone_autocharge"
             android:icon="@drawable/ic_autorenew_cellphone_android"

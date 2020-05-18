@@ -30,7 +30,7 @@ public class MyForeGroundServicePhoneAuto extends Service {
 
     Long auto_start, auto_end;
 
-    boolean isAutoON = false, isStartReceived = false, isEndReceived = false, isPhoneCharging;
+    boolean isAutoON = false, isStartReceived = false, isEndReceived = false;
 
     public MyForeGroundServicePhoneAuto() {
         final DatabaseReference phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
@@ -89,20 +89,6 @@ public class MyForeGroundServicePhoneAuto extends Service {
                 Toast.makeText(getApplicationContext(),"Failed to read extra's switch",Toast.LENGTH_SHORT).show();
             }
         });
-
-        final DatabaseReference phone_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_phone");
-        phone_switch_firebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                assert value != null;
-                isPhoneCharging = value.equals("ON");
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read phone's status",Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void phone_autocharge(){
@@ -110,16 +96,21 @@ public class MyForeGroundServicePhoneAuto extends Service {
         BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
         assert batterymanager != null;
         final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        if(battery_percentage <= auto_end) phone_switch_firebase.setValue("ON");
+        if(battery_percentage < auto_end) phone_switch_firebase.setValue("ON");
         else phone_switch_firebase.setValue("OFF");
-        final CountDownTimer phone_auto_timer = new CountDownTimer(604800000, 1000) {
+        final CountDownTimer phone_auto_timer = new CountDownTimer(604800000, 10000) {
             public void onTick(long millisUntilFinished) {
                 if(isAutoON){
                     BatteryManager batterymanager = (BatteryManager)getSystemService(BATTERY_SERVICE);
                     assert batterymanager != null;
                     final int battery_percentage = batterymanager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-                    if(battery_percentage <= auto_start) if(!isPhoneCharging) phone_switch_firebase.setValue("ON");
-                    else if(battery_percentage >= auto_end) if(isPhoneCharging) phone_switch_firebase.setValue("OFF");
+                    if(battery_percentage <= auto_start){
+                        phone_switch_firebase.setValue("ON");
+                    }
+
+                    else if(battery_percentage >= auto_end){
+                        phone_switch_firebase.setValue("OFF");
+                    }
                 }
                 else{
                     stopForegroundService();
@@ -157,7 +148,6 @@ public class MyForeGroundServicePhoneAuto extends Service {
                     break;
                 case ACTION_STOP_FOREGROUND_SERVICE:
                     stopForegroundService();
-                    Toast.makeText(getApplicationContext(), "Foreground service is stopped.", Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -183,7 +173,7 @@ public class MyForeGroundServicePhoneAuto extends Service {
 
         // Create notification builder.
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setContentTitle("Automatic charging enabled")
+                .setContentText("Automatic charging enabled")
                 .setSmallIcon(R.drawable.ic_launcher_grayscale)
                 .setPriority(0);
 

@@ -97,7 +97,6 @@ public class MyForeGroundServiceExtraOFF extends Service {
                     break;
                 case ACTION_STOP_FOREGROUND_SERVICE:
                     stopForegroundService();
-                    Toast.makeText(getApplicationContext(), "Foreground service is stopped.", Toast.LENGTH_LONG).show();
                     break;
             }
 
@@ -126,7 +125,7 @@ public class MyForeGroundServiceExtraOFF extends Service {
 
         // Create notification builder.
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setContentTitle("Extra switch's charging will turn OFF at " + output_time_of_execution_hour + ":" + output_time_of_execution_min)
+                .setContentText("Extra switch's charging will turn OFF at " + output_time_of_execution_hour + ":" + output_time_of_execution_min)
                 .setSmallIcon(R.drawable.ic_launcher_grayscale)
                 .setPriority(0);
 

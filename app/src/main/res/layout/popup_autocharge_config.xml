@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="15dp">
+
+            <RelativeLayout
+                android:paddingHorizontal="10dp"
+                android:id="@+id/layout_start_end_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:background="@null"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    android:textSize="17sp"
+                    android:id="@+id/heading"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Battery Range: "/>
+
+                <EditText
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/edittext_auto_start"
+                    android:layout_toEndOf="@id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="00"/>
+
+                <TextView
+                    android:fontFamily="sans-serif-medium"
+                    android:background="@null"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    android:textSize="17sp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/text_to"
+                    android:layout_toEndOf="@id/edittext_auto_start"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="to"/>
+
+                <EditText
+                    android:layout_toEndOf="@id/text_to"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/edittext_auto_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="100"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_start_end_buttons">
+
+                <Button
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingVertical="10dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/button_auto_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"/>
+
+                <Button
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/button_auto_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="save"/>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

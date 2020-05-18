@@ -11,7 +11,8 @@
     <RelativeLayout
         android:id="@+id/loading_screen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_centerInParent="true"
@@ -36,6 +37,7 @@
                 android:text="Loading"/>
 
             <ProgressBar
+                android:layout_marginTop="-5dp"
                 android:layout_marginHorizontal="18dp"
                 android:id="@+id/loading_progress_bar"
                 android:layout_width="match_parent"
@@ -45,10 +47,11 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/text_internet_hint"
             android:textColor="@color/textColor"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="Make sure you have active internet connection"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -210,6 +213,7 @@
 
         <Button
             style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/layout_style"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:drawablePadding="5dp"
@@ -217,7 +221,6 @@
             android:drawableStart="@drawable/ic_timer"
             android:layout_alignParentBottom="true"
             android:id="@+id/timer_button"
-            android:background="@drawable/layout_style"
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
