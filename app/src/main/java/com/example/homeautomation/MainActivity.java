@@ -248,9 +248,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.config_sockets:
                 LayoutInflater config_sockets_inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 popupView_sockets = config_sockets_inflater.inflate(R.layout.popup_switch_config,null);
-                popupWindow_sockets = new PopupWindow(popupView_sockets, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow_sockets = new PopupWindow(popupView_sockets, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 popupWindow_sockets.setElevation(100);
-                popupWindow_sockets.showAtLocation(layout_main, Gravity.CENTER, 0, -150);
+                popupWindow_sockets.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
 
                 editText_socket_phone = popupView_sockets.findViewById(R.id.edittext_phone_socket);
                 switch_phone_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_id_phone");
@@ -349,9 +349,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.change_auto_details:
                 LayoutInflater auto_config_inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 popupView_auto = auto_config_inflater.inflate(R.layout.popup_autocharge_config,null);
-                popupWindow_auto = new PopupWindow(popupView_auto, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow_auto = new PopupWindow(popupView_auto, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 popupWindow_auto.setElevation(100);
-                popupWindow_auto.showAtLocation(layout_main, Gravity.CENTER, 0, -150);
+                popupWindow_auto.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
 
                 auto_start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
                 editText_auto_start = popupView_auto.findViewById(R.id.edittext_auto_start);
