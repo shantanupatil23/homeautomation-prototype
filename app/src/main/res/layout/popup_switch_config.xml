@@ -18,7 +18,7 @@
 
             <RelativeLayout
                 android:paddingHorizontal="10dp"
-                android:id="@+id/layout_start_end_buttons"
+                android:id="@+id/layout_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -29,11 +29,11 @@
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
                     android:textSize="17sp"
-                    android:id="@+id/heading"
+                    android:id="@+id/text_phone"
                     android:textAlignment="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Battery Range: "/>
+                    android:text="Phone's Socket: "/>
 
                 <EditText
                     android:inputType="number"
@@ -44,29 +44,35 @@
                     android:textSize="14sp"
                     android:paddingHorizontal="5dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/edittext_auto_start"
-                    android:layout_toEndOf="@id/heading"
+                    android:id="@+id/edittext_phone_socket"
+                    android:layout_toEndOf="@id/text_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="00"/>
+                    android:hint="0"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_below="@id/layout_phone"
+                android:paddingHorizontal="10dp"
+                android:id="@+id/layout_laptop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
+                    android:layout_centerVertical="true"
                     android:fontFamily="sans-serif-medium"
                     android:background="@null"
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
                     android:textSize="17sp"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/text_to"
-                    android:layout_toEndOf="@id/edittext_auto_start"
-                    android:layout_marginHorizontal="3dp"
+                    android:id="@+id/text_laptop"
+                    android:textAlignment="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="to"/>
+                    android:text="Laptop's Socket: "/>
 
                 <EditText
                     android:inputType="number"
-                    android:layout_toEndOf="@id/text_to"
                     android:fontFamily="sans-serif-medium"
                     android:textAlignment="center"
                     android:textColor="@color/colorAccent"
@@ -74,18 +80,54 @@
                     android:textSize="14sp"
                     android:paddingHorizontal="5dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/edittext_auto_end"
+                    android:id="@+id/edittext_laptop_socket"
+                    android:layout_toEndOf="@id/text_laptop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="100"/>
+                    android:hint="0"/>
+            </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_below="@id/layout_laptop"
+                android:paddingHorizontal="10dp"
+                android:id="@+id/layout_extra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:background="@null"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    android:textSize="17sp"
+                    android:id="@+id/text_extra"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extra Socket: "/>
+
+                <EditText
+                    android:inputType="number"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/edittext_extra_socket"
+                    android:layout_toEndOf="@id/text_extra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="0"/>
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout_start_end_buttons">
+                android:layout_below="@id/layout_extra">
 
                 <Button
                     android:fontFamily="sans-serif-medium"
@@ -96,7 +138,7 @@
                     android:minWidth="0dp"
                     android:paddingVertical="10dp"
                     style="?android:attr/borderlessButtonStyle"
-                    android:id="@+id/button_auto_cancel"
+                    android:id="@+id/button_switch_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>
@@ -109,7 +151,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     style="?android:attr/borderlessButtonStyle"
-                    android:id="@+id/button_auto_save"
+                    android:id="@+id/button_switch_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="save"/>

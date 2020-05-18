@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/config_switches"
-        android:title="Reconfigure switches"/>
+    <item android:id="@+id/config_sockets"
+        android:title="Reconfigure sockets"/>
 
     <item android:id="@+id/change_auto_details"
         android:title="Reconfigure Autocharge"/>
