@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         my_toolbar.setTitle("");
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
         CountDownTimer loading_timer = new CountDownTimer(7000, 1000) {
             public void onTick(long millisUntilFinished) {

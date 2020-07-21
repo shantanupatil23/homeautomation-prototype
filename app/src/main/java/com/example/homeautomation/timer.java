@@ -32,9 +32,6 @@ public class timer extends AppCompatActivity {
         my_toolbar.setTitle("");
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-
-
 
         ImageButton phone_auto_on = findViewById(R.id.phone_auto);
         phone_auto_on.setOnClickListener(new View.OnClickListener() {
