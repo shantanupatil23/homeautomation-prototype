@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".OfficeActivity">
 
     <RelativeLayout
         android:id="@+id/loading_screen"
@@ -65,7 +65,6 @@
         layout="@layout/custom_action_bar" />
 
     <RelativeLayout
-        android:id="@+id/office_view"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="10dp"
@@ -74,12 +73,132 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
+            android:alpha="0.9"
+            android:id="@+id/fan_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_fan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/fan_image"
+            android:background="@null"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="15dp"
+            android:text="Fan"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+
+        <Switch
+            android:id="@+id/fan_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_style"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:alpha="0.55"
+            android:id="@+id/light_small_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/light_small_image"
+            android:background="@null"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="15dp"
+            android:text="Lights"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+
+        <Switch
+            android:id="@+id/light_small_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_style"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:alpha="0.55"
+            android:id="@+id/light_main_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_light_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/light_main_image"
+            android:background="@null"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="15dp"
+            android:text="Lights"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12.5sp" />
+
+
+        <Switch
+            android:id="@+id/light_main_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_style"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
             android:id="@+id/phone_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_cellphone_android"
-            android:visibility="gone" />
+            android:src="@drawable/ic_cellphone_android" />
 
         <TextView
             android:id="@+id/phone_delay"
@@ -90,21 +209,21 @@
             android:background="@null"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
-            android:text="Office"
+            android:text="Phone"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
-            android:textSize="17.5sp" />
+            android:textSize="12.5sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp">
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/phone_switch">
 
             <ImageButton
-                android:id="@+id/office_auto"
+                android:id="@+id/phone_auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -117,7 +236,7 @@
                 android:id="@+id/auto_bar"
                 android:layout_width="26dp"
                 android:layout_height="2dp"
-                android:layout_below="@id/office_auto"
+                android:layout_below="@id/phone_auto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
                 android:background="#888888" />
@@ -130,8 +249,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 
@@ -147,8 +265,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_laptop_chromebook"
-            android:visibility="gone" />
+            android:src="@drawable/ic_laptop_chromebook" />
 
         <TextView
             android:id="@+id/laptop_delay"
@@ -159,48 +276,18 @@
             android:background="@null"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
-            android:text="Living Room"
+            android:text="Laptop"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
-            android:textSize="17.5sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp">
-
-            <ImageButton
-                android:id="@+id/phone1_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:src="@drawable/ic_autorenew" />
-
-            <View
-                android:id="@+id/auto2_bar"
-                android:layout_width="26dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/phone1_auto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:background="#888888" />
-
-        </RelativeLayout>
-
+            android:textSize="12.5sp" />
 
         <Switch
             android:id="@+id/laptop_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 
@@ -216,8 +303,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_power_socket_de"
-            android:visibility="gone" />
+            android:src="@drawable/ic_power_socket_de" />
 
         <TextView
             android:id="@+id/extra_delay"
@@ -227,103 +313,22 @@
             android:layout_toEndOf="@id/extra_image"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
-            android:text="Kitchen"
+            android:text="Extra socket"
             android:textAlignment="viewStart"
             android:textColor="@color/colorSecondary"
-            android:textSize="17.5sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp">
-
-            <ImageButton
-                android:id="@+id/phone3_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:src="@drawable/ic_autorenew" />
-
-            <View
-                android:id="@+id/auto3_bar"
-                android:layout_width="26dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/phone3_auto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:background="#888888" />
-
-        </RelativeLayout>
-
+            android:textSize="12.5sp" />
 
         <Switch
             android:id="@+id/extra_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/layout_style"
-        android:paddingHorizontal="10dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:fontFamily="sans-serif-medium"
-            android:paddingHorizontal="15dp"
-            android:text="Bed Room"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorSecondary"
-            android:textSize="17.5sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp">
-
-            <ImageButton
-                android:id="@+id/phone12_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:src="@drawable/ic_autorenew" />
-
-            <View
-                android:id="@+id/auto22_bar"
-                android:layout_width="26dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/phone12_auto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:background="#888888" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp">
@@ -345,8 +350,7 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/textColor"
-            android:textSize="15sp"
-            android:visibility="gone" />
+            android:textSize="15sp" />
 
     </RelativeLayout>
 

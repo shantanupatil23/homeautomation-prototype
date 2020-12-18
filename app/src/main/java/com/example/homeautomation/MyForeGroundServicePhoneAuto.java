@@ -166,7 +166,7 @@ public class MyForeGroundServicePhoneAuto extends Service {
                 "Phone's automatic charging",
                 NotificationManager.IMPORTANCE_MIN
         );
-        automatic_charging.setDescription("Persistant notification for Phone's automatic charging");
+        automatic_charging.setDescription("Persistent notification for Phone's automatic charging");
         NotificationManager manager = getSystemService(NotificationManager.class);
         assert manager != null;
         manager.createNotificationChannel(automatic_charging);
