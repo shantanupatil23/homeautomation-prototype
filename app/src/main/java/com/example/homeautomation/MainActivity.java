@@ -61,6 +61,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, OfficeActivity.class));
             }
         });
+        findViewById(R.id.kitchen_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, KitchenActivity.class));
+            }
+        });
+        findViewById(R.id.living_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LivingActivity.class));
+            }
+        });
+        findViewById(R.id.bed_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, BedActivity.class));
+            }
+        });
 
 
         office_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("office_auto");

@@ -40,8 +40,8 @@ public class OfficeActivity extends AppCompatActivity {
     int loading = 0;
     Boolean isAutoON = false;
     View auto_bar;
-    DatabaseReference phone_auto_firebase, phone_switch_firebase, laptop_switch_firebase, extra_switch_firebase, auto_start, auto_end, switch_phone_firebase, switch_laptop_firebase, switch_extra_firebase;
-    EditText editText_auto_start, editText_auto_end, editText_socket_phone, editText_socket_laptop,editText_socket_extra;
+    DatabaseReference phone_auto_firebase, phone_switch_firebase, fan_switch_firebase, small_light_switch_firebase, light_switch_firebase, laptop_switch_firebase, extra_switch_firebase, auto_start, auto_end, switch_phone_firebase, switch_laptop_firebase, switch_extra_firebase;
+    EditText editText_auto_start, editText_auto_end, editText_socket_phone, editText_socket_laptop, editText_socket_extra;
     View popupView_auto, popupView_sockets;
     PopupWindow popupWindow_auto, popupWindow_sockets;
     LinearLayout layout_main;
@@ -54,19 +54,19 @@ public class OfficeActivity extends AppCompatActivity {
 
         Toolbar my_toolbar = findViewById(R.id.action_bar);
         my_toolbar.setTitle("");
-        my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu));
+        my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
 
         CountDownTimer loading_timer = new CountDownTimer(7000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
+
             public void onFinish() {
                 TextView textView = findViewById(R.id.text_internet_hint);
                 textView.setVisibility(View.VISIBLE);
             }
         };
         loading_timer.start();
-
 
 
         phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
@@ -76,19 +76,19 @@ public class OfficeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                if (value.equals("ON")){
+                if (value.equals("ON")) {
                     Intent intent = new Intent(OfficeActivity.this, MyForeGroundServicePhoneAuto.class);
                     intent.setAction(MyForeGroundServicePhoneAuto.ACTION_START_FOREGROUND_SERVICE);
                     startService(intent);
                     isAutoON = true;
                     auto_bar.setBackgroundColor(Color.GREEN);
-                }
-                else{
+                } else {
                     isAutoON = false;
                     auto_bar.setBackgroundColor(Color.GRAY);
                 }
                 loading_func();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -98,11 +98,106 @@ public class OfficeActivity extends AppCompatActivity {
         auto_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isAutoON){
+                if (isAutoON) {
                     phone_auto_firebase.setValue("OFF");
-                }
-                else{
+                } else {
                     phone_auto_firebase.setValue("ON");
+                }
+            }
+        });
+
+        fan_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_office_fan");
+        final Switch fan_switch_view = findViewById(R.id.fan_switch);
+        fan_switch_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if (value.equals("ON")) {
+                    fan_switch_view.setChecked(true);
+                } else if (value.equals("OFF")) {
+                    fan_switch_view.setChecked(false);
+                }
+                loading_func();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to read fan's status", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        fan_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    fan_switch_firebase.setValue("ON");
+                } else {
+                    fan_switch_firebase.setValue("OFF");
+                }
+            }
+        });
+
+        small_light_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_office_small_light");
+        final Switch small_light_switch_view = findViewById(R.id.small_light_switch);
+        small_light_switch_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if (value.equals("ON")) {
+                    small_light_switch_view.setChecked(true);
+                } else if (value.equals("OFF")) {
+                    small_light_switch_view.setChecked(false);
+                }
+                loading_func();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to read small_light's status", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        small_light_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    small_light_switch_firebase.setValue("ON");
+                } else {
+                    small_light_switch_firebase.setValue("OFF");
+                }
+            }
+        });
+
+        light_switch_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("switch_status_office_light");
+        final Switch light_switch_view = findViewById(R.id.light_switch);
+        light_switch_firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                assert value != null;
+                if (value.equals("ON")) {
+                    light_switch_view.setChecked(true);
+                } else if (value.equals("OFF")) {
+                    light_switch_view.setChecked(false);
+                }
+                loading_func();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to read light's status", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        light_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    light_switch_firebase.setValue("ON");
+                } else {
+                    light_switch_firebase.setValue("OFF");
                 }
             }
         });
@@ -114,27 +209,26 @@ public class OfficeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                if(value.equals("ON")){
+                if (value.equals("ON")) {
                     phone_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
+                } else if (value.equals("OFF")) {
                     phone_switch_view.setChecked(false);
                 }
                 loading_func();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read phone's status",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to read phone's status", Toast.LENGTH_SHORT).show();
             }
         });
 
         phone_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     phone_switch_firebase.setValue("ON");
-                }
-                else {
+                } else {
                     phone_switch_firebase.setValue("OFF");
                 }
             }
@@ -147,27 +241,26 @@ public class OfficeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                if(value.equals("ON")){
+                if (value.equals("ON")) {
                     laptop_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
+                } else if (value.equals("OFF")) {
                     laptop_switch_view.setChecked(false);
                 }
                 loading_func();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read laptop's status",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to read laptop's status", Toast.LENGTH_SHORT).show();
             }
         });
 
         laptop_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     laptop_switch_firebase.setValue("ON");
-                }
-                else {
+                } else {
                     laptop_switch_firebase.setValue("OFF");
                 }
             }
@@ -180,27 +273,26 @@ public class OfficeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 assert value != null;
-                if(value.equals("ON")){
+                if (value.equals("ON")) {
                     extra_switch_view.setChecked(true);
-                }
-                else if(value.equals("OFF")){
+                } else if (value.equals("OFF")) {
                     extra_switch_view.setChecked(false);
                 }
                 loading_func();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Failed to read extra's status",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to read extra's status", Toast.LENGTH_SHORT).show();
             }
         });
 
         extra_switch_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     extra_switch_firebase.setValue("ON");
-                }
-                else {
+                } else {
                     extra_switch_firebase.setValue("OFF");
                 }
             }
@@ -215,11 +307,11 @@ public class OfficeActivity extends AppCompatActivity {
         });
     }
 
-    private void loading_func(){
+    private void loading_func() {
         loading += 25;
         ProgressBar progressBarLoading = findViewById(R.id.loading_progress_bar);
         progressBarLoading.setProgress(loading);
-        if (loading==100){
+        if (loading == 100) {
             RelativeLayout loading_layout = findViewById(R.id.loading_screen);
             loading_layout.setVisibility(View.GONE);
         }
@@ -235,10 +327,10 @@ public class OfficeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.config_sockets:
                 LayoutInflater config_sockets_inflater = (LayoutInflater) OfficeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                popupView_sockets = config_sockets_inflater.inflate(R.layout.popup_switch_config,null);
+                popupView_sockets = config_sockets_inflater.inflate(R.layout.popup_switch_config, null);
                 popupWindow_sockets = new PopupWindow(popupView_sockets, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 popupWindow_sockets.setElevation(100);
                 popupWindow_sockets.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
@@ -252,8 +344,10 @@ public class OfficeActivity extends AppCompatActivity {
                         assert value != null;
                         editText_socket_phone.setHint(String.valueOf(value));
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
 
                 editText_socket_laptop = popupView_sockets.findViewById(R.id.edittext_laptop_socket);
@@ -265,8 +359,10 @@ public class OfficeActivity extends AppCompatActivity {
                         assert value != null;
                         editText_socket_laptop.setHint(String.valueOf(value));
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
 
                 editText_socket_extra = popupView_sockets.findViewById(R.id.edittext_extra_socket);
@@ -278,8 +374,10 @@ public class OfficeActivity extends AppCompatActivity {
                         assert value != null;
                         editText_socket_extra.setHint(String.valueOf(value));
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
 
 
@@ -290,37 +388,34 @@ public class OfficeActivity extends AppCompatActivity {
                         String str_phone = editText_socket_phone.getText().toString(), str_laptop = editText_socket_laptop.getText().toString(), str_extra = editText_socket_extra.getText().toString();
                         int switch_phone, switch_laptop, switch_extra;
                         boolean isValid = true;
-                        if (!str_phone.equals("")){
-                            if (!str_phone.equals(str_laptop) && !str_phone.equals(str_extra)){
+                        if (!str_phone.equals("")) {
+                            if (!str_phone.equals(str_laptop) && !str_phone.equals(str_extra)) {
                                 switch_phone = Integer.parseInt(str_phone);
                                 switch_phone_firebase.setValue(switch_phone);
-                            }
-                            else{
+                            } else {
                                 isValid = false;
                                 Toast.makeText(getApplicationContext(), "Two switches can not be same", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if (!str_laptop.equals("")){
-                            if (!str_laptop.equals(str_phone) && !str_laptop.equals(str_extra)){
+                        if (!str_laptop.equals("")) {
+                            if (!str_laptop.equals(str_phone) && !str_laptop.equals(str_extra)) {
                                 switch_laptop = Integer.parseInt(str_laptop);
                                 switch_laptop_firebase.setValue(switch_laptop);
-                            }
-                            else{
+                            } else {
                                 isValid = false;
                                 Toast.makeText(getApplicationContext(), "Two switches can not be same", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if (!str_extra.equals("")){
-                            if (!str_extra.equals(str_phone) && !str_extra.equals(str_laptop)){
+                        if (!str_extra.equals("")) {
+                            if (!str_extra.equals(str_phone) && !str_extra.equals(str_laptop)) {
                                 switch_extra = Integer.parseInt(str_extra);
                                 switch_extra_firebase.setValue(switch_extra);
-                            }
-                            else{
+                            } else {
                                 isValid = false;
                                 Toast.makeText(getApplicationContext(), "Two switches can not be same", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if (isValid){
+                        if (isValid) {
                             popupWindow_sockets.dismiss();
                             Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
                         }
@@ -339,7 +434,7 @@ public class OfficeActivity extends AppCompatActivity {
 
             case R.id.change_auto_details:
                 LayoutInflater auto_config_inflater = (LayoutInflater) OfficeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                popupView_auto = auto_config_inflater.inflate(R.layout.popup_autocharge_config,null);
+                popupView_auto = auto_config_inflater.inflate(R.layout.popup_autocharge_config, null);
                 popupWindow_auto = new PopupWindow(popupView_auto, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
                 popupWindow_auto.setElevation(100);
                 popupWindow_auto.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
@@ -353,8 +448,10 @@ public class OfficeActivity extends AppCompatActivity {
                         assert value != null;
                         editText_auto_start.setHint(String.valueOf(value));
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
                 auto_end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
                 editText_auto_end = popupView_auto.findViewById(R.id.edittext_auto_end);
@@ -365,8 +462,10 @@ public class OfficeActivity extends AppCompatActivity {
                         assert value != null;
                         editText_auto_end.setHint(String.valueOf(value));
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
 
 
@@ -376,11 +475,11 @@ public class OfficeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String str_start = editText_auto_start.getText().toString(), str_end = editText_auto_end.getText().toString();
                         int auto_start_int, auto_end_int;
-                        if (!str_start.equals("")){
+                        if (!str_start.equals("")) {
                             auto_start_int = Integer.parseInt(str_start);
                             auto_start.setValue(auto_start_int);
                         }
-                        if (!str_end.equals("")){
+                        if (!str_end.equals("")) {
                             auto_end_int = Integer.parseInt(str_end);
                             auto_end.setValue(auto_end_int);
                         }

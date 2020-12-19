@@ -136,6 +136,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/living_view"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="10dp"
@@ -205,6 +206,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/kitchen_view"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="10dp"
@@ -272,6 +274,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/bed_view"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="10dp"

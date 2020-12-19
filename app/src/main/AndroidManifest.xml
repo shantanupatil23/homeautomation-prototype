@@ -26,8 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OfficeActivity"></activity>
-        <!-- ForeGround Services -->
+        <activity android:name=".BedActivity"></activity>
+        <activity android:name=".LivingActivity" />
+        <activity android:name=".KitchenActivity" />
+        <activity android:name=".OfficeActivity" /> <!-- ForeGround Services -->
         <service
             android:name=".MyForeGroundServicePhoneAuto"
             android:enabled="true"
@@ -73,7 +75,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".RegistrationActivity" />
         <activity android:name=".timer" /> <!-- QS Tile Services -->
         <service
             android:name=".MyTileService_phone_autocharge"

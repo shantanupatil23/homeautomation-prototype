@@ -73,11 +73,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.9"
             android:id="@+id/fan_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.9"
             android:src="@drawable/ic_fan" />
 
         <TextView
@@ -113,11 +113,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.55"
             android:id="@+id/light_small_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.55"
             android:src="@drawable/ic_light" />
 
         <TextView
@@ -153,11 +153,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.55"
             android:id="@+id/light_main_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.55"
             android:src="@drawable/ic_light_small" />
 
         <TextView
@@ -187,170 +187,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/layout_style"
-        android:paddingHorizontal="10dp">
-
-        <ImageView
-            android:id="@+id/phone_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_cellphone_android" />
-
-        <TextView
-            android:id="@+id/phone_delay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/phone_image"
-            android:background="@null"
-            android:fontFamily="sans-serif-medium"
-            android:paddingHorizontal="15dp"
-            android:text="Phone"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorSecondary"
-            android:textSize="12.5sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@id/phone_switch">
-
-            <ImageButton
-                android:id="@+id/phone_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:src="@drawable/ic_autorenew" />
-
-            <View
-                android:id="@+id/auto_bar"
-                android:layout_width="26dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/phone_auto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:background="#888888" />
-
-        </RelativeLayout>
-
-
-        <Switch
-            android:id="@+id/phone_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/layout_style"
-        android:paddingHorizontal="10dp">
-
-        <ImageView
-            android:id="@+id/laptop_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_laptop_chromebook" />
-
-        <TextView
-            android:id="@+id/laptop_delay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/laptop_image"
-            android:background="@null"
-            android:fontFamily="sans-serif-medium"
-            android:paddingHorizontal="15dp"
-            android:text="Laptop"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorSecondary"
-            android:textSize="12.5sp" />
-
-        <Switch
-            android:id="@+id/laptop_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="@drawable/layout_style"
-        android:paddingHorizontal="10dp">
-
-        <ImageView
-            android:id="@+id/extra_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_power_socket_de" />
-
-        <TextView
-            android:id="@+id/extra_delay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/extra_image"
-            android:fontFamily="sans-serif-medium"
-            android:paddingHorizontal="15dp"
-            android:text="Extra socket"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorSecondary"
-            android:textSize="12.5sp" />
-
-        <Switch
-            android:id="@+id/extra_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:visibility="gone">
 
-        <Button
-            android:id="@+id/timer_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/layout_style"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawablePadding="5dp"
-            android:fontFamily="sans-serif-medium"
-            android:padding="15dp"
-            android:text="Timer"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/textColor"
-            android:textSize="15sp" />
 
     </RelativeLayout>
 
