@@ -184,7 +184,7 @@ public class RegistrationActivity extends AppCompatActivity {
             String url = "http://" + ipv4 + ":" + port + '/';
             RequestBody postBodyImage = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart("image", username.toString()+".jpg", RequestBody.create(byteArray, MediaType.parse("image/*jpg")))
+                    .addFormDataPart("image", username.getText().toString()+".jpg", RequestBody.create(byteArray, MediaType.parse("image/*jpg")))
                     .build();
 
 
