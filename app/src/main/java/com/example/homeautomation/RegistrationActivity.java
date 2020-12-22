@@ -2,6 +2,7 @@ package com.example.homeautomation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -47,6 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static final String ipv4 = "192.168.0.108";
     private static final String port = "5000";
+    private static final String REGISTERED = "Register Boolean";
 
 
 
@@ -189,6 +191,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
             RequestPost(url, postBodyImage);
             Log.d("serverlog", "got past Reqpost function");
+            SharedPreferences sharedPreferences = getSharedPreferences(REGISTERED,MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(REGISTERED,true);
+            editor.apply();
             Toast.makeText(this, "connected to the server", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e){
