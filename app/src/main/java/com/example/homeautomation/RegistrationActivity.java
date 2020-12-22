@@ -146,8 +146,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView text_response = findViewById(R.id.textView);
-                        text_response.setText("Could not connect to server");
+
+                        Toast.makeText(RegistrationActivity.this, "Could not connect to the server", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -158,9 +158,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView text_response = findViewById(R.id.textView);
                         try{
-                            text_response.setText(response.body().string());
+                            Toast.makeText(RegistrationActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
 
                         }
                         catch(IOException e)
@@ -184,13 +183,13 @@ public class RegistrationActivity extends AppCompatActivity {
             String url = "http://" + ipv4 + ":" + port + '/';
             RequestBody postBodyImage = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart("image", username.toString()+".jpg", RequestBody.create(byteArray, MediaType.parse("image/*jpg")))
+                    .addFormDataPart("image", username.getText().toString()+".jpg", RequestBody.create(byteArray, MediaType.parse("image/*jpg")))
                     .build();
 
 
             RequestPost(url, postBodyImage);
             Log.d("serverlog", "got past Reqpost function");
-            Toast.makeText(this, "final url is:" + " " + url, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "connected to the server", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e){
             e.printStackTrace();

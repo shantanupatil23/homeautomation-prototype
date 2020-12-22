@@ -16,12 +16,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
         <Button
             android:id="@+id/capture_image_btn"
             android:layout_width="match_parent"
@@ -63,6 +57,7 @@
                 android:layout_marginBottom="64dp"
                 android:enabled="false"
                 android:text="Register" />
+
         </RelativeLayout>
 
         <ImageView
@@ -70,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher" />
+
     </LinearLayout>
 
 </LinearLayout>

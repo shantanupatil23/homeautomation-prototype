@@ -69,13 +69,15 @@
         <activity android:name=".PopUpAutochargeConfig" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".RegistrationActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity" />
         <activity android:name=".timer" /> <!-- QS Tile Services -->
         <service
             android:name=".MyTileService_phone_autocharge"
