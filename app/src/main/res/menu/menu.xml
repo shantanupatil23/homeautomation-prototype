@@ -7,4 +7,7 @@
     <item android:id="@+id/change_auto_details"
         android:title="Reconfigure Autocharge"/>
 
+    <item android:id="@+id/logout"
+        android:title="Logout"/>
+
 </menu>
