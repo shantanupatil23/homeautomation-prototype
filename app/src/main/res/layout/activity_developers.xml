@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This application is developed by students of MIT ADT University, Pune.\n\nWe would love to hear your feedback."
+            android:textSize="17.5sp"
+            android:textColor="@color/black_overlay"
+            android:fontFamily="sans-serif"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/View1"
+            android:layout_below="@id/textView1"
+            android:background="@drawable/layout_style"
+            android:layout_marginTop="20dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Shantanu Patil"
+                android:textColor="@color/black_overlay"
+                android:textSize="13sp" />
+
+            <ImageButton
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:id="@+id/linkedin1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@mipmap/linkedin" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/View2"
+            android:layout_below="@id/View1"
+            android:background="@drawable/layout_style"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="13sp"
+                android:textColor="@color/black_overlay"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vedank Pande"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@mipmap/linkedin" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/View3"
+            android:layout_below="@id/View2"
+            android:background="@drawable/layout_style"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="13sp"
+                android:textColor="@color/black_overlay"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anant Mokashi"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@mipmap/linkedin" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/View4"
+            android:layout_below="@id/View3"
+            android:background="@drawable/layout_style"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="13sp"
+                android:textColor="@color/black_overlay"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akshaj Pratap Singh"/>
+
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/linkedin4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@mipmap/linkedin" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App Version: 0.1 (Beta)"
+            android:textSize="13sp"
+            android:textColor="@color/black_overlay"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="10dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
