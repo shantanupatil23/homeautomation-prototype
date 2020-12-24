@@ -142,8 +142,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.logout:
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            {   FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+            case R.id.dev_info:
+            {
+                startActivity(new Intent(getApplicationContext(),Developers.class));
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
