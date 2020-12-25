@@ -1,10 +1,5 @@
 package com.example.homeautomation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,12 +17,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.os.CountDownTimer;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,17 +53,6 @@ public class OfficeActivity extends AppCompatActivity {
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
 
-        CountDownTimer loading_timer = new CountDownTimer(7000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                TextView textView = findViewById(R.id.text_internet_hint);
-                textView.setVisibility(View.VISIBLE);
-            }
-        };
-        loading_timer.start();
-
 
         phone_auto_firebase = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("phone_auto");
         auto_bar = findViewById(R.id.auto_bar);
@@ -86,7 +71,6 @@ public class OfficeActivity extends AppCompatActivity {
                     isAutoON = false;
                     auto_bar.setBackgroundColor(Color.GRAY);
                 }
-                loading_func();
             }
 
             @Override
@@ -118,7 +102,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     fan_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -150,7 +133,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     small_light_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -182,7 +164,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     light_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -214,7 +195,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     phone_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -246,7 +226,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     laptop_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -278,7 +257,6 @@ public class OfficeActivity extends AppCompatActivity {
                 } else if (value.equals("OFF")) {
                     extra_switch_view.setChecked(false);
                 }
-                loading_func();
             }
 
             @Override
@@ -297,16 +275,6 @@ public class OfficeActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void loading_func() {
-        loading += 25;
-        ProgressBar progressBarLoading = findViewById(R.id.loading_progress_bar);
-        progressBarLoading.setProgress(loading);
-        if (loading == 100) {
-            RelativeLayout loading_layout = findViewById(R.id.loading_screen);
-            loading_layout.setVisibility(View.GONE);
-        }
     }
 
     @Override
