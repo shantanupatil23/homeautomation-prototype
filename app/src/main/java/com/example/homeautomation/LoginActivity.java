@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             else{
                                 startActivity(new Intent(getApplicationContext(),RegistrationActivity.class));
                             }*/
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),RegistrationActivity.class));
 
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
