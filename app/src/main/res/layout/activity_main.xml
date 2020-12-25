@@ -8,58 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/loading_screen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_foreground" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="-25dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="Loading"
-                android:textColor="@color/textColor"
-                android:textSize="18sp" />
-
-            <ProgressBar
-                android:id="@+id/loading_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="18dp"
-                android:layout_marginTop="-5dp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/text_internet_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="sans-serif"
-            android:text="Make sure you have active internet connection"
-            android:textColor="@color/textColor"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
-
     <include
         android:id="@+id/action_bar"
         layout="@layout/custom_action_bar" />
@@ -73,20 +21,12 @@
         android:background="@drawable/layout_style"
         android:paddingHorizontal="10dp">
 
-        <ImageView
-            android:id="@+id/phone_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_cellphone_android"
-            android:visibility="gone" />
 
         <TextView
             android:id="@+id/phone_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/phone_image"
             android:background="@null"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
@@ -124,15 +64,6 @@
 
         </RelativeLayout>
 
-
-        <Switch
-            android:id="@+id/phone_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -143,20 +74,11 @@
         android:background="@drawable/layout_style"
         android:paddingHorizontal="10dp">
 
-        <ImageView
-            android:id="@+id/laptop_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_laptop_chromebook"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/laptop_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/laptop_image"
             android:background="@null"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
@@ -195,14 +117,6 @@
         </RelativeLayout>
 
 
-        <Switch
-            android:id="@+id/laptop_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -213,20 +127,12 @@
         android:background="@drawable/layout_style"
         android:paddingHorizontal="10dp">
 
-        <ImageView
-            android:id="@+id/extra_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_power_socket_de"
-            android:visibility="gone" />
 
         <TextView
             android:id="@+id/extra_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/extra_image"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="15dp"
             android:text="Kitchen"
@@ -262,14 +168,6 @@
 
         </RelativeLayout>
 
-
-        <Switch
-            android:id="@+id/extra_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
 
     </RelativeLayout>
 

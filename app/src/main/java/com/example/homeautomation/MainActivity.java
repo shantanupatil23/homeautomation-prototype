@@ -45,17 +45,6 @@ public class MainActivity extends AppCompatActivity {
         my_toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_menu));
         setSupportActionBar(my_toolbar);
 
-        CountDownTimer loading_timer = new CountDownTimer(7000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                TextView textView = findViewById(R.id.text_internet_hint);
-                textView.setVisibility(View.VISIBLE);
-            }
-        };
-        loading_timer.start();
-
         findViewById(R.id.office_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     isOfficeAutoON = false;
                     office_auto_bar.setBackgroundColor(Color.GRAY);
                 }
-                loading_func();
             }
 
             @Override
@@ -119,17 +107,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void loading_func() {
-        loading += 25;
-        ProgressBar progressBarLoading = findViewById(R.id.loading_progress_bar);
-        progressBarLoading.setProgress(loading);
-        if (loading == 100) {
-            RelativeLayout loading_layout = findViewById(R.id.loading_screen);
-            loading_layout.setVisibility(View.GONE);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
