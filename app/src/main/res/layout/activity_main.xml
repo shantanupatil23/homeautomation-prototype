@@ -325,33 +325,4 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp">
-
-        <Button
-            android:id="@+id/timer_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/layout_style"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawablePadding="5dp"
-            android:fontFamily="sans-serif-medium"
-            android:padding="15dp"
-            android:text="Timer"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/textColor"
-            android:textSize="15sp"
-            android:visibility="gone" />
-
-    </RelativeLayout>
-
-
 </LinearLayout>
