@@ -51,8 +51,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private static final String REGISTERED = "Register Boolean";
 
 
-
-    Button mCaptureBtn;
+    Boolean registered_bool = false;
+    Button mCaptureBtn,go_to_main;
     ImageView mImageView;
     EditText username;
 
@@ -66,6 +66,20 @@ public class RegistrationActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.image_view);
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         username = findViewById(R.id.username);
+        go_to_main = findViewById(R.id.register);
+
+        //button click
+        go_to_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (registered_bool){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+                else{
+                    Toast.makeText(RegistrationActivity.this, "Please register for face recognition before you proceed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         //button click
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +210,7 @@ public class RegistrationActivity extends AppCompatActivity {
             editor.putBoolean(REGISTERED,true);
             editor.apply();
             Toast.makeText(this, "connected to the server", Toast.LENGTH_SHORT).show();
+            registered_bool = true;
         }
         catch(IOException e){
             e.printStackTrace();
