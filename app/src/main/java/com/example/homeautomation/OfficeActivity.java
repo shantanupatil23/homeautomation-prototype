@@ -297,14 +297,6 @@ public class OfficeActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Button timer = findViewById(R.id.timer_button);
-        timer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OfficeActivity.this, timer.class));
-            }
-        });
     }
 
     private void loading_func() {
@@ -327,71 +319,69 @@ public class OfficeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.change_auto_details:
-                LayoutInflater auto_config_inflater = (LayoutInflater) OfficeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                popupView_auto = auto_config_inflater.inflate(R.layout.popup_autocharge_config, null);
-                popupWindow_auto = new PopupWindow(popupView_auto, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-                popupWindow_auto.setElevation(100);
-                popupWindow_auto.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
+        if (id == R.id.change_auto_details) {
+            LayoutInflater auto_config_inflater = (LayoutInflater) OfficeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            popupView_auto = auto_config_inflater.inflate(R.layout.popup_autocharge_config, null);
+            popupWindow_auto = new PopupWindow(popupView_auto, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+            popupWindow_auto.setElevation(100);
+            popupWindow_auto.showAtLocation(layout_main, Gravity.CENTER, 0, 0);
 
-                auto_start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
-                editText_auto_start = popupView_auto.findViewById(R.id.edittext_auto_start);
-                auto_start.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Integer value = dataSnapshot.getValue(Integer.class);
-                        assert value != null;
-                        editText_auto_start.setHint(String.valueOf(value));
-                    }
+            auto_start = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_begin");
+            editText_auto_start = popupView_auto.findViewById(R.id.edittext_auto_start);
+            auto_start.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Integer value = dataSnapshot.getValue(Integer.class);
+                    assert value != null;
+                    editText_auto_start.setHint(String.valueOf(value));
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                auto_end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
-                editText_auto_end = popupView_auto.findViewById(R.id.edittext_auto_end);
-                auto_end.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Integer value = dataSnapshot.getValue(Integer.class);
-                        assert value != null;
-                        editText_auto_end.setHint(String.valueOf(value));
-                    }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+            auto_end = FirebaseDatabase.getInstance().getReference().child("NodeMCU").child("auto_phone_end");
+            editText_auto_end = popupView_auto.findViewById(R.id.edittext_auto_end);
+            auto_end.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Integer value = dataSnapshot.getValue(Integer.class);
+                    assert value != null;
+                    editText_auto_end.setHint(String.valueOf(value));
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
 
-                Button save_button_auto = popupView_auto.findViewById(R.id.button_auto_save);
-                save_button_auto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String str_start = editText_auto_start.getText().toString(), str_end = editText_auto_end.getText().toString();
-                        int auto_start_int, auto_end_int;
-                        if (!str_start.equals("")) {
-                            auto_start_int = Integer.parseInt(str_start);
-                            auto_start.setValue(auto_start_int);
-                        }
-                        if (!str_end.equals("")) {
-                            auto_end_int = Integer.parseInt(str_end);
-                            auto_end.setValue(auto_end_int);
-                        }
-                        popupWindow_auto.dismiss();
-                        Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
+            Button save_button_auto = popupView_auto.findViewById(R.id.button_auto_save);
+            save_button_auto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String str_start = editText_auto_start.getText().toString(), str_end = editText_auto_end.getText().toString();
+                    int auto_start_int, auto_end_int;
+                    if (!str_start.equals("")) {
+                        auto_start_int = Integer.parseInt(str_start);
+                        auto_start.setValue(auto_start_int);
                     }
-                });
+                    if (!str_end.equals("")) {
+                        auto_end_int = Integer.parseInt(str_end);
+                        auto_end.setValue(auto_end_int);
+                    }
+                    popupWindow_auto.dismiss();
+                    Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                Button cancel_button_auto = popupView_auto.findViewById(R.id.button_auto_cancel);
-                cancel_button_auto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow_auto.dismiss();
-                    }
-                });
-                break;
+            Button cancel_button_auto = popupView_auto.findViewById(R.id.button_auto_cancel);
+            cancel_button_auto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow_auto.dismiss();
+                }
+            });
         }
         return super.onOptionsItemSelected(item);
     }

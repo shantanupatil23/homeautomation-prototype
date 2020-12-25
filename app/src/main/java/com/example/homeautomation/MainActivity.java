@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.dev_info: {
-                startActivity(new Intent(getApplicationContext(), Developers.class));
+                startActivity(new Intent(getApplicationContext(), DevelopersActivity.class));
             }
             break;
 

@@ -73,11 +73,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.9"
             android:id="@+id/fan_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.9"
             android:src="@drawable/ic_fan" />
 
         <TextView
@@ -113,11 +113,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.55"
             android:id="@+id/light_small_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.55"
             android:src="@drawable/ic_light" />
 
         <TextView
@@ -153,11 +153,11 @@
         android:paddingHorizontal="10dp">
 
         <ImageView
-            android:alpha="0.55"
             android:id="@+id/light_main_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
+            android:alpha="0.55"
             android:src="@drawable/ic_light_small" />
 
         <TextView
@@ -324,33 +324,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp">
-
-        <Button
-            android:id="@+id/timer_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/layout_style"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawablePadding="5dp"
-            android:fontFamily="sans-serif-medium"
-            android:padding="15dp"
-            android:text="Timer"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/textColor"
-            android:textSize="15sp" />
 
     </RelativeLayout>
 
