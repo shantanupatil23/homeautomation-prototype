@@ -10,60 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Developers"></activity>
-        <activity android:name=".EmailRegistration" />
-        <activity android:name=".BedActivity" />
-        <activity android:name=".LivingActivity" />
-        <activity android:name=".KitchenActivity" />
-        <activity android:name=".OfficeActivity" /> <!-- ForeGround Services -->
-        <activity android:name=".PopUpAutochargeConfig" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity"></activity>
-        <activity android:name=".timer" />
+        <activity android:name=".EmailRegistrationActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".OfficeActivity" />
+        <activity android:name=".LivingActivity" />
+        <activity android:name=".KitchenActivity" />
+        <activity android:name=".BedActivity" />
+        <activity android:name=".DevelopersActivity" />
 
-        <service
-            android:name=".MyForeGroundServicePhoneAuto"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServicePhoneAutoON"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServicePhoneAutoOFF"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServicePhoneON"
-            android:enabled="true"
-            android:exported="true" /> <!-- Activities -->
-        <service
-            android:name=".MyForeGroundServicePhoneOFF"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServiceLaptopON"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServiceLaptopOFF"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServiceExtraON"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyForeGroundServiceExtraOFF"
-            android:enabled="true"
-            android:exported="true" /> <!-- QS Tile Services -->
         <service
             android:name=".MyTileService_phone_autocharge"
             android:icon="@drawable/ic_autorenew_cellphone_android"
@@ -107,15 +69,15 @@
             <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
     </queries>
-    <uses-feature android:name="android.hardware.camera" />
 
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
