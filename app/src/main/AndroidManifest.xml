@@ -17,7 +17,7 @@
         <activity android:name=".KitchenActivity" />
         <activity android:name=".OfficeActivity" /> <!-- ForeGround Services -->
         <activity android:name=".PopUpAutochargeConfig" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".timer" />
 
         <service
