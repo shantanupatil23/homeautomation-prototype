@@ -16,8 +16,8 @@ def send_email(receiver,text_string,image_data):
 
     smtp_server = "smtp.gmail.com"
     port = 587
-    sender = "sem5miniprojectalpha@gmail.com"
-    password = "icewallowcum"
+    sender = "#sender email
+    password = #password
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "MP5Subject"
