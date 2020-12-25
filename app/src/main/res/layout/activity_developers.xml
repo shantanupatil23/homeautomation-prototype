@@ -8,6 +8,11 @@
     android:background="@color/colorBackground">
 
 
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/custom_action_bar" />
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

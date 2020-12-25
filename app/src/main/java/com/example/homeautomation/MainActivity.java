@@ -141,14 +141,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.logout:
-            {   FirebaseAuth.getInstance().signOut();
+            case R.id.logout: {
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
-            case R.id.dev_info:
-            {
-                startActivity(new Intent(getApplicationContext(),Developers.class));
+            break;
+            case R.id.dev_info: {
+                startActivity(new Intent(getApplicationContext(), Developers.class));
             }
+            break;
 
         }
         return super.onOptionsItemSelected(item);
