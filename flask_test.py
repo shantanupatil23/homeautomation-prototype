@@ -36,4 +36,5 @@ def handle_request():
     cv2.imwrite(filepath,img)
     return "successfully uploaded image to server"
 
+#0.0.0.0 sets to current ip address
 app.run(host="0.0.0.0",port =5000, debug = True) 
