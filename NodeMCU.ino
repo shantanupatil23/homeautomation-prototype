@@ -9,10 +9,10 @@
 #include <FirebaseArduino.h>  
   
 
-#define FIREBASE_HOST "home-automation-401.firebaseio.com"  
-#define FIREBASE_AUTH "R5TFNyTOP6xASytBVAsmujVNsUOteRpEugfgnfSV"  
-#define WIFI_SSID "Anil Niwas"  
-#define WIFI_PASSWORD "gitah3Giaghailie"  
+#define FIREBASE_HOST "example.firebaseio.com"  //replace with Firebse Database URL
+#define FIREBASE_AUTH "SecurityCode"  //replace with actual security code from Firebase
+#define WIFI_SSID "ssid" //replace with WiFi SSID 
+#define WIFI_PASSWORD "password" //replace with WiFi SSID  
 
 
 int pin1 = 9; // Sets the value for Pin1 of Relay
