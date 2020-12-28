@@ -45,8 +45,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
-
-    private static final String ipv4 = "192.168.0.108";
+    
+    #enter IP address here
+    private static final String ipv4 = "enter ip here";
     private static final String port = "5000";
     private static final String REGISTERED = "Register Boolean";
 
