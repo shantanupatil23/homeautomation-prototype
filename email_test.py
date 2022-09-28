@@ -7,11 +7,6 @@ from PIL import Image
 import PIL
 
 
-
-
-#receiver = "vedank.pande@gmail.com"
-
-
 def send_email(receiver,text_string,image_data):
 
     smtp_server = "smtp.gmail.com"
